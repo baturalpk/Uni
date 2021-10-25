@@ -29,7 +29,7 @@ public class Tester {
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
 		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
-		else										assert false : "Not able to instantite the Class: " + _class;
+		else										assert false : "Not able to instantiate the Class: " + _class;
 		
 		int expectedSize = 3;
 		int expectedTableSize = HashTableLP.INITIAL_CAP;
@@ -55,7 +55,7 @@ public class Tester {
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
 		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
-		else										assert false : "Not able to instantite Class: " + _class;
+		else										assert false : "Not able to instantiate Class: " + _class;
 		
 		String key = "ABC";
 		
@@ -87,7 +87,7 @@ public class Tester {
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
 		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
-		else										assert false : "Not able to instantite Class: " + _class;
+		else										assert false : "Not able to instantiate Class: " + _class;
 		
 		int expectedSize = 26;
 		

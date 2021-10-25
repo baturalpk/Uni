@@ -9,14 +9,14 @@
 //-----------------------------------------------------
 public interface IHashTable<K, V> {
 	
-	public int getM();
+	int getM();
 	
-	public void put(K key, V value);
+	void put(K key, V value);
 	
-	public V get(K key);
+	V get(K key);
 	
-	public void remove(K key);
+	void remove(K key);
 	
-	public int size();
+	int size();
 	
 }

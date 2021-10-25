@@ -9,7 +9,6 @@
 //-----------------------------------------------------
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class Utils {
 	
 	private static class MostRecurringWords {
 		
-		private class Word {
+		private static class Word {
 			String key = "";
 			Integer value = -1;
 			Integer LPIndex = -1;

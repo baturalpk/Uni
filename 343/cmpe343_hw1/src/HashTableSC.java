@@ -15,7 +15,7 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
 	private Node[] st;
 	
     public static class Node {
-        Object key;
+        final Object key;
         Object val;
         Node next;
 
