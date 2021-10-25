@@ -11,11 +11,15 @@ import java.util.ArrayList;
 public class DriverPart_1 {
 
 	public static void main(String[] args) {
+		if (args.length <= 0) {
+			System.err.println("No argument provided!");
+			System.exit(1);
+		}
 		
 		IHashTable<String, Integer> linearProbingHT = new HashTableLP<>();
 		IHashTable<String, Integer> separateChainingHT = new HashTableSC<>();
 		
-		ArrayList<String> content = Utils.ReadFromStandardInput();
+		ArrayList<String> content = Utils.ReadFromArguments(args);
 		
 		Utils.FillDictionaryWithValues(content, linearProbingHT);
 		Utils.FillDictionaryWithValues(content, separateChainingHT);
@@ -30,7 +34,6 @@ public class DriverPart_1 {
 		Utils.FindAndPrintMostRecurring3Keys(
 				(HashTableLP<String, Integer>) linearProbingHT, 
 				(HashTableSC<String, Integer>) separateChainingHT);
-		
 	}
 
 }
