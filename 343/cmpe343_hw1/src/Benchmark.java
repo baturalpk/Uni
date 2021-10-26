@@ -23,13 +23,12 @@ public class Benchmark {
 		long timeElapsedAddition = TestInsertionOperation(dictionary, content);
 		System.out.println("Put operation:");
 		System.out.println("* Time taken: " + timeElapsedAddition + " ms.");
-		System.out.println("* Table size: " + dictionary.getM());
+		System.out.println //("* Table size: " + dictionary.getM()); TODO: __> instead of M values try to interpret N/M values or sth. else
 		Thread.sleep(1000);
 		
 		long timeElapsedRetrieval = TestGetOperation(dictionary, content);
 		System.out.println("Get operation:");
 		System.out.println("* Time taken: " + timeElapsedRetrieval + " ms.");
-		System.out.println("* Table size: " + dictionary.getM());
 		Thread.sleep(1000);
 		
 		long timeElapsedDeletion = TestDeletionOperation(dictionary, content);
@@ -74,8 +73,10 @@ public class Benchmark {
 		Instant __start__ = Instant.now();
 		
 		// Retrieve an element in each iteration
-		for (String word: words) {
-			Integer value = dictionary.get(word);
+		for (int i = 0; i < 50000; ++i) {
+			for (String word: words) {
+				Integer value = dictionary.get(word);
+			}
 		}
 		
 		Instant __finish__ = Instant.now();

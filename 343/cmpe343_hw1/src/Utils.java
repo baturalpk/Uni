@@ -9,9 +9,7 @@
 //-----------------------------------------------------
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Utils {
 	
@@ -34,6 +32,19 @@ public class Utils {
 			third = new Word();
 		}
 	
+	}
+	
+	public static ArrayList<String> ReadFromScanner() {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<String> content = new ArrayList<>();
+
+		
+		for (String word: sc.nextLine().trim().split(" ")) {
+			content.add(word);
+		}
+		
+		sc.close();
+		return content;
 	}
 
 	public static ArrayList<String> ReadFromArguments(String[] args) {

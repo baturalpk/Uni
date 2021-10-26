@@ -104,4 +104,6 @@ public class Tester {
 		System.out.println(dict.getClass() + " : Test-3 : " + "success");
 		Thread.sleep(500);
 	}
+	
+	static void Test_4(Class _class, ...) // TODO: __> test Utils functions and find most recurring3words for example (DO NOT forget to print them)
 }
