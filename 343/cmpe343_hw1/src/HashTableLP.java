@@ -19,9 +19,10 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	public HashTableLP() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Overloaded constructor with no parameters. Initializes
+		// the hash table with default initial capacity which is 16.
+		// Precondition: -
+		// Postcondition: Hash table is initialized.
 		//--------------------------------------------------------
 		
 		this(INITIAL_CAP);
@@ -29,9 +30,10 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	public HashTableLP(int initialCapacity) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Initializes member variables of the hash table 
+		// with default and given values.
+		// Precondition: initialCapacity is an integer.
+		// Postcondition: M, N, keys, and values variables are initialized.
 		//--------------------------------------------------------
 		
 		this.M = initialCapacity;
@@ -42,9 +44,11 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	public void resize(int newCapacity) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Creates a new linear probing hash table instance with 
+		// the given size. Reinserts existing key/value pairs. Sets 
+		// member variables of newly created hash table to existing one.
+		// Precondition: newCapacity is integer.
+		// Postcondition: Current hash table is resized.
 		//--------------------------------------------------------
 		
 		HashTableLP<K, V> newHT = new HashTableLP<>(newCapacity);
@@ -64,9 +68,11 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@SuppressWarnings("unchecked")
 	public K[] getKeysAs(Class<K> _class) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Creates a new array instance with the given class type.
+		// Copies existing keys array into newly created one returns it.
+		// It ensures avoidance from generic array cast exceptions.
+		// Precondition: _class is concrete type of class K
+		// Postcondition: Returns hardcopy of this.keys
 		//--------------------------------------------------------
 		
 		K[] castedKeys = (K[]) Array.newInstance(_class, this.keys.length);
@@ -77,9 +83,11 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@SuppressWarnings("unchecked")
 	public V[] getValuesAs(Class<V> _class) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Creates a new array instance with the given class type.
+		// Copies existing values array into newly created one returns it.
+		// It ensures avoidance from generic array cast exceptions.
+		// Precondition: _class is concrete type of class V
+		// Postcondition: Returns hardcopy of this.values
 		//--------------------------------------------------------
 		
 		V[] castedValues = (V[]) Array.newInstance(_class, this.values.length);
@@ -90,9 +98,9 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@Override
 	public int getM() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Getter for table size (M).
+		// Precondition: -
+		// Postcondition: Returns M
 		//--------------------------------------------------------
 		
 		return this.M;
@@ -101,9 +109,9 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@Override
 	public int size() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Getter for total item count (N).
+		// Precondition: -
+		// Postcondition: Returns N.
 		//--------------------------------------------------------
 		
 		return this.N;
@@ -111,9 +119,9 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 
 	public boolean isEmpty() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Checks for emptiness of hash table.
+		// Precondition: -
+		// Postcondition: Returns true if it is empty, otherwise false.
 		//--------------------------------------------------------
 		
 		return this.N == 0;
@@ -121,9 +129,9 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	public int hash(K key) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Hash function implementation for the hash table.
+		// Precondition: key is a K (abbreviation for Key)
+		// Postcondition: Calculates and return hash for the given key.
 		//--------------------------------------------------------
 		
 		return (key.hashCode() & 0x7fffffff) % M;
@@ -132,9 +140,9 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@Override
 	public V get(K key) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Gets value of given key if it exists, otherwise returns null.
+		// Precondition: key is a K
+		// Postcondition: Return V or null
 		//--------------------------------------------------------
 		
 		int expectedHashIndex = this.hash(key);
@@ -153,9 +161,11 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@Override
 	public void put(K key, V value) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Resizes hash table if it's necessary. Then searches for
+		// the desired key by scanning possible indices (linear probing offsets)
+		// If it founds the key, overwrites the value. Otherwise just inserts.
+		// Precondition: key is a K, value is a V
+		// Postcondition: Inserts or updates given key/value pair into hash table.
 		//--------------------------------------------------------
 		
         if (this.N >= this.M/2) 
@@ -177,13 +187,14 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	@Override
 	public void delete(K key) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Removes the key if the hash table contains it.
+		// Rehashes all keys to rearrange tables. Then resizes if it is necessary.
+		// Precondition: key is K.
+		// Postcondition: Removes desired key/value or it is idempotent.
 		//--------------------------------------------------------
 		
         if (this.get(key) == null) return;
-
+        
         int i = hash(key);
         while (!key.equals(this.keys[i])) {
             i = (i + 1) % this.M;

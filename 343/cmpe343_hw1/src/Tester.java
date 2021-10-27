@@ -14,7 +14,9 @@ public class Tester {
 
 	public static void main(String[] args) throws InterruptedException {
 		//--------------------------------------------------------
-		// Summary: Entry point of Executes all tests respectively.
+		// Summary: Entry point of Tester class. Executes all tests respectively.
+		// NOTE: Assertions must be enabled from Eclipse Run Configurations for Tester.java 
+		// class by passing "-ea" flag to Java VM arguments.
 		// Precondition: args is string array.
 		// Postcondition: Prints test results to console.
 		//--------------------------------------------------------
@@ -33,9 +35,10 @@ public class Tester {
 	
 	static void Test_1() throws InterruptedException {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Takes input from user and calculates most recurring 3 keys. Then print tables' sizes, 
+		// item counts and most recurring keys with their indices & occurrences.
+		// Precondition: -
+		// Postcondition: Prints test results.
 		//--------------------------------------------------------
 		
 		IHashTable<String, Integer> dictLP = new HashTableLP<>();
@@ -61,9 +64,10 @@ public class Tester {
 	
 	static void Test_2(Class _class, int expectedM) throws InterruptedException {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Instantiates Hash Table according to given class type dynamically. Puts 3 different keys.
+		// Puts key1 15 times. Removes 1 keys. Validates test results with expected ones.
+		// Precondition: _class indicates class type, expectedTableSize is an integer
+		// Postcondition: Prints test results.
 		//--------------------------------------------------------
 		
 		IHashTable<String, Integer> dict = null;
@@ -114,9 +118,10 @@ public class Tester {
 
 	static void Test_3(Class _class, int expectedTableSize) throws InterruptedException {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Instantiates Hash Table according to given class type dynamically. 
+		// Puts all letters of alphabets once. Validates test results with expected ones.
+		// Precondition: _class indicates class type, expectedTableSize is an integer
+		// Postcondition: Prints test results.
 		//--------------------------------------------------------
 		
 		IHashTable<String, Integer> dict = null;
