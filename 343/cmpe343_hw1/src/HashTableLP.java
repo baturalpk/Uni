@@ -18,10 +18,22 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	private V[] values;
 	
 	public HashTableLP() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		this(INITIAL_CAP);
 	}
 	
 	public HashTableLP(int initialCapacity) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		this.M = initialCapacity;
 		this.N = 0;
 		this.keys = (K[]) new Object[M];
@@ -29,6 +41,12 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	}
 	
 	public void resize(int newCapacity) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		HashTableLP<K, V> newHT = new HashTableLP<>(newCapacity);
 		
 		for (int i = 0; i < this.M; ++i) {
@@ -45,6 +63,12 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 
 	@SuppressWarnings("unchecked")
 	public K[] getKeysAs(Class<K> _class) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		K[] castedKeys = (K[]) Array.newInstance(_class, this.keys.length);
 		System.arraycopy(this.keys, 0, castedKeys, 0, this.keys.length);
 		return castedKeys;
@@ -52,6 +76,12 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	@SuppressWarnings("unchecked")
 	public V[] getValuesAs(Class<V> _class) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		V[] castedValues = (V[]) Array.newInstance(_class, this.values.length);
 		System.arraycopy(this.values, 0, castedValues, 0, this.values.length);
 		return castedValues;
@@ -59,24 +89,54 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	
 	@Override
 	public int getM() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.M;
 	}
 
 	@Override
 	public int size() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.N;
 	}
 
 	public boolean isEmpty() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.N == 0;
 	}
 	
 	public int hash(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return (key.hashCode() & 0x7fffffff) % M;
 	}
 	
 	@Override
 	public V get(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		int expectedHashIndex = this.hash(key);
 		K currentKey;
 		
@@ -92,6 +152,12 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 
 	@Override
 	public void put(K key, V value) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
         if (this.N >= this.M/2) 
         	resize(this.M * 2);
 
@@ -109,7 +175,13 @@ public class HashTableLP<K, V> implements IHashTable<K, V> {
 	}
 
 	@Override
-	public void remove(K key) {
+	public void delete(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
         if (this.get(key) == null) return;
 
         int i = hash(key);

@@ -35,6 +35,12 @@ public class Utils {
 	}
 	
 	public static ArrayList<String> ReadFromScanner() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		Scanner sc = new Scanner(System.in);
 		ArrayList<String> content = new ArrayList<>();
 
@@ -48,14 +54,32 @@ public class Utils {
 	}
 
 	public static ArrayList<String> ReadFromArguments(String[] args) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return new ArrayList<>(Arrays.asList(args));
 	}
 	
 	public static ArrayList<String> ReadInputFileContent(String fileName) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return ReadInputFileContent(new String[]{ fileName });
 	}
 	
 	public static ArrayList<String> ReadInputFileContent(String[] args) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		String fileName = "sampleinput1.txt"; // Default
 		
 		if (args.length > 0) {
@@ -87,7 +111,13 @@ public class Utils {
 		return content;
 	}
 	
-	public static void FillDictionaryWithValues(ArrayList<String> words, IHashTable<String, Integer> dictionary) {		
+	public static void FillDictionaryWithValues(ArrayList<String> words, IHashTable<String, Integer> dictionary) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 			for (String word: words) {
 				Integer existingValue = dictionary.get(word);
 				if (existingValue == null) {
@@ -99,6 +129,11 @@ public class Utils {
 		}
 		
 	public static void FindAndPrintMostRecurring3Keys(HashTableLP<String, Integer> lpht, HashTableSC<String, Integer> scht) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		
 		MostRecurringWords mostRecurrings = new MostRecurringWords();
 		

@@ -11,7 +11,12 @@ import java.util.ArrayList;
 public class DriverPart_1 {
 
 	public static void main(String[] args) {
-
+		//--------------------------------------------------------
+		// Summary: Creates 2 different hash table implementations. Reads inputs from user as a one-liner.
+		// Fills dictionaries with the given user input. Print table sizes and most recurring keys with their indices.
+		// Precondition: args is string array
+		// Postcondition: Final table sizes and most recurring 3 words are found and printed out to console.
+		//--------------------------------------------------------
 		
 		IHashTable<String, Integer> linearProbingHT = new HashTableLP<>();
 		IHashTable<String, Integer> separateChainingHT = new HashTableSC<>();
@@ -28,7 +33,6 @@ public class DriverPart_1 {
 		}
 		
 		ArrayList<String> content = Utils.ReadFromArguments(args);
-
 		*/
 		
 		Utils.FillDictionaryWithValues(content, linearProbingHT);

@@ -20,6 +20,12 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
         Node next;
 
         public Node(Object key, Object val, Node next)  {
+    		//--------------------------------------------------------
+    		// Summary: 
+    		// Precondition: 
+    		// Postcondition: 
+    		//--------------------------------------------------------
+    		
             this.key  = key;
             this.val  = val;
             this.next = next;
@@ -27,16 +33,34 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
     }
     
     public HashTableSC() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		this(INITIAL_CAP);
 	}
 	
 	public HashTableSC(int initialCapacity) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		this.M = initialCapacity;
 		this.N = 0;
 		st = new Node[M];
 	}
 
 	public void resize(int chains) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		HashTableSC<K, V> newHT = new HashTableSC<>(chains);
 		
 		for (int i = 0; i < M; ++i) {
@@ -51,29 +75,65 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
 	}
 
 	public Node getChain(int chainIndex) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return st[chainIndex];
 	}
 	
 	@Override
 	public int getM() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.M;
 	}
 
 	@Override
 	public int size() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.N;
 	}
 
 	public boolean isEmpty() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return this.N == 0;
 	}
 	
 	public int hash(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		return (key.hashCode() & 0x7fffffff) % M;
 	}
 
 	@Override
 	public V get(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		int i = this.hash(key);
 		
 		for (Node x = st[i]; x != null; x = x.next) {
@@ -86,6 +146,12 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
 
 	@Override
 	public void put(K key, V val) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		if (N >= 8 * M) 
 			resize(2*M);
 		
@@ -113,7 +179,13 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
 	}
 
 	@Override
-	public void remove(K key) {
+	public void delete(K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		int i = this.hash(key);
 		this.st[i] = this.removeNodes(st[i], key);
 		
@@ -122,6 +194,12 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
 	}
 	
 	private Node removeNodes(Node x, K key) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		if (x == null) 
 			return null;
 		

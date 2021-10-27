@@ -15,7 +15,7 @@ public interface IHashTable<K, V> {
 	
 	V get(K key);
 	
-	void remove(K key);
+	void delete(K key);
 	
 	int size();
 	

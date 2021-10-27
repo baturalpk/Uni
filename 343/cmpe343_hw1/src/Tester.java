@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 //-----------------------------------------------------
 // Title: Tester - test class
 // Author: Baturalp KIZILTAN
@@ -10,9 +8,16 @@ import java.util.ArrayList;
 //				These tests are used to validate whether implementations of both linear probing & separate
 //				chaining hash tables are correct or not on a most basic sense.
 //-----------------------------------------------------
+import java.util.ArrayList;
+
 public class Tester {
 
 	public static void main(String[] args) throws InterruptedException {
+		//--------------------------------------------------------
+		// Summary: Entry point of Executes all tests respectively.
+		// Precondition: args is string array.
+		// Postcondition: Prints test results to console.
+		//--------------------------------------------------------
 		
 		Test_1();
 		System.out.println("--------\n");
@@ -27,12 +32,18 @@ public class Tester {
 	}
 	
 	static void Test_1() throws InterruptedException {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		IHashTable<String, Integer> dictLP = new HashTableLP<>();
 		IHashTable<String, Integer> dictSC = new HashTableSC<>();
 		
 		System.out.println("Test-1 for both " + dictLP.getClass() + " & " + dictSC.getClass() + ":");
 		
-		//
+		// ---
 		System.out.println("Insert inputs as a one line (each word must be separated with whitespace):");
 		ArrayList<String> words = Utils.ReadFromScanner();
 		
@@ -43,12 +54,18 @@ public class Tester {
 		System.out.println("Most recurring 3 keys: (note> input must contain at least 3 distinct/unique words for better testability)");
 		Utils.FindAndPrintMostRecurring3Keys((HashTableLP<String, Integer>) dictLP, (HashTableSC<String, Integer>) dictSC);
 		
-		//
+		// ---
 		System.out.println("*** done, ! check results for your expected output values !");
 		Thread.sleep(500);
 	}
 	
 	static void Test_2(Class _class, int expectedM) throws InterruptedException {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		IHashTable<String, Integer> dict = null;
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
@@ -74,7 +91,7 @@ public class Tester {
 		dict.put(key2, 1);
 		dict.put(key3, 1);
 		
-		dict.remove(key2);
+		dict.delete(key2);
 		// ---
 		
 		System.out.printf("EXPECTED:\n*N=%d *M=%d *ValueFor key1=%d\n", expectedSize, expectedTableSize, expectedValue);
@@ -96,6 +113,12 @@ public class Tester {
 	
 
 	static void Test_3(Class _class, int expectedTableSize) throws InterruptedException {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		IHashTable<String, Integer> dict = null;
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
