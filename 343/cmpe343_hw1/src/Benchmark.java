@@ -23,18 +23,19 @@ public class Benchmark {
 		long timeElapsedAddition = TestInsertionOperation(dictionary, content);
 		System.out.println("Put operation:");
 		System.out.println("* Time taken: " + timeElapsedAddition + " ms.");
-		System.out.println //("* Table size: " + dictionary.getM()); TODO: __> instead of M values try to interpret N/M values or sth. else
+		System.out.printf("* M=%d, * N=%d, * N/M ratio=%d\n", dictionary.getM(), dictionary.size(), dictionary.getM()/dictionary.size());
 		Thread.sleep(1000);
 		
 		long timeElapsedRetrieval = TestGetOperation(dictionary, content);
 		System.out.println("Get operation:");
 		System.out.println("* Time taken: " + timeElapsedRetrieval + " ms.");
+		System.out.println("Table size & Item count did not change.");
 		Thread.sleep(1000);
 		
 		long timeElapsedDeletion = TestDeletionOperation(dictionary, content);
 		System.out.println("Delete operation:");
 		System.out.println("* Time taken: " + timeElapsedDeletion + " ms.");
-		System.out.println("* Table size: " + dictionary.getM());
+		System.out.printf("* M=%d, * N=%d, * N/M ratio=%d\n", dictionary.getM(), dictionary.size(), dictionary.getM()/dictionary.size());
 		Thread.sleep(1000);
 		
 	}

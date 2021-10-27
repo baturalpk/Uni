@@ -109,7 +109,7 @@ public class Utils {
 			
 			if (currentValue == null) continue;
 			
-			if (currentValue > mostRecurrings.first.value) {
+			if (currentValue >= mostRecurrings.first.value) {
 				// Set old second as the third.
 				mostRecurrings.third.key = mostRecurrings.second.key;
 				mostRecurrings.third.value = mostRecurrings.second.value;
@@ -126,8 +126,8 @@ public class Utils {
 				mostRecurrings.first.value = currentValue;
 				mostRecurrings.first.LPIndex = index;
 			}
-			else if (currentValue < mostRecurrings.first.value && 
-					currentValue > mostRecurrings.second.value) {
+			else if (currentValue <= mostRecurrings.first.value && 
+					currentValue >= mostRecurrings.second.value) {
 				//
 				mostRecurrings.third.key = mostRecurrings.second.key;
 				mostRecurrings.third.value = mostRecurrings.second.value;
@@ -139,8 +139,8 @@ public class Utils {
 				
 
 			}
-			else if (currentValue < mostRecurrings.second.value && 
-					currentValue > mostRecurrings.third.value) {
+			else if (currentValue <= mostRecurrings.second.value && 
+					currentValue >= mostRecurrings.third.value) {
 				//
 				mostRecurrings.third.key = currentKey;
 				mostRecurrings.third.value = currentValue;

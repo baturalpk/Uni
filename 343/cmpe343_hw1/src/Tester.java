@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 //-----------------------------------------------------
 // Title: Tester - test class
 // Author: Baturalp KIZILTAN
@@ -12,61 +14,72 @@ public class Tester {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		Test_1(HashTableLP.class);
-		Test_2(HashTableLP.class);
+		Test_1();
+		System.out.println("--------\n");
+		Test_2(HashTableLP.class, HashTableLP.INITIAL_CAP / 2);
 		Test_3(HashTableLP.class, 64);
 		System.out.println("---------");
-		Test_1(HashTableSC.class);
-		Test_2(HashTableSC.class);
+		Test_2(HashTableSC.class, HashTableLP.INITIAL_CAP);
 		Test_3(HashTableSC.class, 16);
 		
 		System.out.println("\n-- ALL TESTS SUCCESSFULLY DONE --");
 		
 	}
 	
-	static void Test_1(Class _class) throws InterruptedException {
-		IHashTable<String, Integer> dict = null;
+	static void Test_1() throws InterruptedException {
+		IHashTable<String, Integer> dictLP = new HashTableLP<>();
+		IHashTable<String, Integer> dictSC = new HashTableSC<>();
 		
-		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
-		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
-		else										assert false : "Not able to instantiate the Class: " + _class;
+		System.out.println("Test-1 for both " + dictLP.getClass() + " & " + dictSC.getClass() + ":");
 		
-		int expectedSize = 3;
-		int expectedTableSize = HashTableLP.INITIAL_CAP;
+		//
+		System.out.println("Insert inputs as a one line (each word must be separated with whitespace):");
+		ArrayList<String> words = Utils.ReadFromScanner();
 		
-		dict.put("A", 1);
-		dict.put("B", 1);
-		dict.put("C", 1);
-		dict.put("D", 1);
-		dict.remove("A");
+		Utils.FillDictionaryWithValues(words, dictLP);
+		Utils.FillDictionaryWithValues(words, dictSC);
+		System.out.printf("Table sizes for linear probing=%d & separate chaining=%d.\n", dictLP.getM(), dictSC.getM());
+		System.out.printf("Total item count for linear probing=%d & separate chaining=%d.\n", dictLP.size(), dictSC.size());
+		System.out.println("Most recurring 3 keys: (note> input must contain at least 3 distinct/unique words for better testability)");
+		Utils.FindAndPrintMostRecurring3Keys((HashTableLP<String, Integer>) dictLP, (HashTableSC<String, Integer>) dictSC);
 		
-		assert expectedSize == dict.size() 
-				: dict.getClass() + ": Test-1 > Total key/value count is incorrect";
-		
-		assert expectedTableSize == dict.getM() 
-				: dict.getClass() + ": Test-1 > Table size is incorrect";
-		
-		System.out.println(dict.getClass() + " : Test-1 : " + "success");
+		//
+		System.out.println("*** done, ! check results for your expected output values !");
 		Thread.sleep(500);
 	}
 	
-	static void Test_2(Class _class) throws InterruptedException {
+	static void Test_2(Class _class, int expectedM) throws InterruptedException {
 		IHashTable<String, Integer> dict = null;
 		
 		if (_class.equals(HashTableLP.class)) 		dict = new HashTableLP<>();
 		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
 		else										assert false : "Not able to instantiate Class: " + _class;
 		
-		String key = "ABC";
+		System.out.println("Test-2 for " + dict.getClass() + ":");
+		
+		// ---
+		String key1 = "ABC";
+		String key2 = "DEF";
+		String key3 = "GHI";
 		
 		Integer expectedValue = 15;
-		int expectedSize = 1;
-		int expectedTableSize = HashTableLP.INITIAL_CAP;
+		int expectedSize = 2;
+		int expectedTableSize = expectedM;
 		
 		for (int i = 1; i <= expectedValue; ++i) {
-			if (i == 1) dict.put(key, 1);
-			else 		dict.put(key, 1 + dict.get(key));
+			if (i == 1) dict.put(key1, 1);
+			else 		dict.put(key1, 1 + dict.get(key1));
 		}
+		
+		dict.put(key2, 1);
+		dict.put(key3, 1);
+		
+		dict.remove(key2);
+		// ---
+		
+		System.out.printf("EXPECTED:\n*N=%d *M=%d *ValueFor key1=%d\n", expectedSize, expectedTableSize, expectedValue);
+		System.out.printf("RESULT:\n*N=%d *M=%d *ValueFor key1=%d\n", dict.size(), dict.getM(), dict.get(key1));
+
 		
 		assert expectedSize == dict.size() 
 				: dict.getClass() + ": Test-2 > Total key/value count is incorrect";
@@ -74,10 +87,10 @@ public class Tester {
 		assert expectedTableSize == dict.getM() 
 				: dict.getClass() + ": Test-2 > Table size is incorrect";
 		
-		assert expectedValue.equals(dict.get(key)) 
+		assert expectedValue.equals(dict.get(key1)) 
 				: dict.getClass() + ": Test-2 > Key 'ABC' doesn't have expected value of " + expectedValue;
 	
-		System.out.println(dict.getClass() + " : Test-2 : " + "success");
+		System.out.println("success\n");
 		Thread.sleep(500);
 	}
 	
@@ -89,11 +102,17 @@ public class Tester {
 		else if (_class.equals(HashTableSC.class)) 	dict = new HashTableSC<>();
 		else										assert false : "Not able to instantiate Class: " + _class;
 		
+		System.out.println("Test-3 for " + dict.getClass() + ":");
+		
+		// ---
 		int expectedSize = 26;
 		
 		for (int c = 65; c < 91; ++c) {
 			dict.put(Character.toString(c), 1);
 		}
+		// ---
+		System.out.printf("EXPECTED:\n*N=%d *M=%d\n", expectedSize, expectedTableSize);
+		System.out.printf("RESULT:\n*N=%d *M=%d\n", dict.size(), dict.getM());
 		
 		assert expectedSize == dict.size() 
 				: dict.getClass() + ": Test-3 > Total key/value count is incorrect";
@@ -101,9 +120,8 @@ public class Tester {
 		assert expectedTableSize == dict.getM() 
 				: dict.getClass() + ": Test-3 > Table size is incorrect";
 	
-		System.out.println(dict.getClass() + " : Test-3 : " + "success");
+		System.out.println("success\n");
 		Thread.sleep(500);
 	}
 	
-	static void Test_4(Class _class, ...) // TODO: __> test Utils functions and find most recurring3words for example (DO NOT forget to print them)
 }

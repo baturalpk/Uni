@@ -16,6 +16,7 @@ public class DriverPart_1 {
 		IHashTable<String, Integer> linearProbingHT = new HashTableLP<>();
 		IHashTable<String, Integer> separateChainingHT = new HashTableSC<>();
 		
+		System.out.println("Waiting for input:");
 		ArrayList<String> content = Utils.ReadFromScanner();
 		
 		/*
