@@ -25,7 +25,7 @@ public class HashTableSC<K, V> implements IHashTable<K, V> {
             this.next = next;
         }
     }
-    
+
     public HashTableSC() {
 		//--------------------------------------------------------
 		// Summary: Overloaded constructor with no parameters. Initializes

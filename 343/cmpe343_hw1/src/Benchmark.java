@@ -21,21 +21,19 @@ public class Benchmark {
 		// Precondition: "dictionary" is a type of hash table, "content" is a string arraylist.
 		// Postcondition: Put, Get, Delete operations are tested and results are printed out to console.
 		//--------------------------------------------------------
-		
+
 		long timeElapsedInsertion = TestTimeForInsertion(dictionary, content);
 		System.out.println("Put operation:");
 		System.out.println("* Time taken: " + timeElapsedInsertion + " ms.");
 		System.out.printf("* M=%d, N=%d, ", dictionary.getM(), dictionary.size());
-		
+
 		if (dictionary.getClass().equals(HashTableLP.class)) {
 			System.out.printf("LoadFactor(N/M)=%.2f\n", (float)dictionary.size()/(float)dictionary.getM());
-			System.out.println("* memory space reserved (approx.) -> 2M = " + (dictionary.getM()*2));
 		}
 		else {
 			System.out.printf("AverageItemCountPerList(N/M)=%.2f\n", (float)dictionary.size()/(float)dictionary.getM());
-			System.out.println("* memory space reserved (approx.) -> M+3N = " + (dictionary.size()*3 + dictionary.getM()));
 		}
-		
+
 		Thread.sleep(500);
 		
 		long timeElapsedRetrieval = TestTimeForRetrieval(dictionary, content);
@@ -73,7 +71,7 @@ public class Benchmark {
 		Instant __finish__ = Instant.now();
 		return Duration.between(__start__, __finish__).toMillis();
 	}
-
+	
 	public static long TestTimeForDeletion(IHashTable<String, Integer> dictionary, ArrayList<String> words) {
 		//--------------------------------------------------------
 		// Summary: Shuffles wordlist. Calculates duration between before the get operation and after the get operation.
@@ -94,7 +92,6 @@ public class Benchmark {
 		Instant __finish__ = Instant.now();
 		return Duration.between(__start__, __finish__).toMillis();
 	}
-	
 
 	public static long TestTimeForRetrieval(IHashTable<String, Integer> dictionary, ArrayList<String> words) {
 		//--------------------------------------------------------

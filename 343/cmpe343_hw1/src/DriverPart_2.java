@@ -20,20 +20,19 @@ public class DriverPart_2 {
 		
 		IHashTable<String, Integer> linearProbingHT = new HashTableLP<>();
 		IHashTable<String, Integer> separateChainingHT = new HashTableSC<>();
-		Runtime runtime = Runtime.getRuntime();
-		
-		System.out.println("*** Starting...");
-		
+
+		System.out.println("*** Starting... [ NOTE: It takes ~2 minutes to be completed. ]");
+
 		// DATASETS
 		ArrayList<String> smallDataset = Utils.ReadInputFileContent("small");	// 20 distinct words
 		ArrayList<String> mediumDataset = Utils.ReadInputFileContent("medium"); // 1000 distinct words
 		ArrayList<String> largeDataset = Utils.ReadInputFileContent("large"); 	// 5000 distinct words
-		
+
 		// SMALL
 		System.out.println("\nSMALL WORDLIST:");
 		System.out.println("Benchmark results for Linear Probing Hash Table:");
 		Benchmark.Execute(linearProbingHT, smallDataset);
-		
+
 		System.out.println("\nBenchmark results for Separate Chaining Hash Table:");
 		Benchmark.Execute(separateChainingHT, smallDataset);
 		System.out.println("-------------------------------------");
@@ -46,18 +45,18 @@ public class DriverPart_2 {
 		System.out.println("\nBenchmark results for Separate Chaining Hash Table:");
 		Benchmark.Execute(separateChainingHT, mediumDataset);
 		System.out.println("-------------------------------------");
-		
+
 		// LARGE
 		System.out.println("\nLARGE WORDLIST:");
 		System.out.println("Benchmark results for Linear Probing Hash Table:");
 		Benchmark.Execute(linearProbingHT, largeDataset);
-		
+
 		System.out.println("\nBenchmark results for Separate Chaining Hash Table:");
 		Benchmark.Execute(separateChainingHT, largeDataset);
 		System.out.println("-------------------------------------");
-		
+
 		System.out.println("\n-- ALL DONE --");
-		
+
 	}
 
 }
