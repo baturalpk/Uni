@@ -27,7 +27,7 @@ public class BreadthFirstPaths {
 
 		while (!fifo.isEmpty()) {
 			int v = fifo.remove();
-			for (int w: G.adj(v)) {
+			for (int w: G.adj(v)) {				
 				if (!marked[w]) {
 					edgeTo[w] = v;
 					distTo[w] = distTo[v] + 1;

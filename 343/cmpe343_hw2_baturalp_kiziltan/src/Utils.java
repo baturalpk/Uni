@@ -1,12 +1,83 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Utils {
+	
+	private static class Number {
+		int val;
+		int dist;
+		
+		Number(int val, int dist) { this.val = val; this.dist = dist; }
+	}
+	
+	public static int BreadthFirstSearch(int src, int tar, ArrayList<Integer> marked) {
+		final int UPPER_BOUNDARY = 10;
+		final int DIGIT_COUNT = 4;
+		Queue<Number> fifo = new LinkedList<>();
+		int distance = 0;
+
+		fifo.add(new Number(src, distance));
+
+		while (fifo.size() > 0) {
+			Number num = fifo.remove();
+			distance = num.dist;
+
+			if (num.val == tar) return distance; 	// target found
+
+			if (marked.contains(num.val)) continue;	// already visited
+
+			marked.add(num.val);
+			
+			int[] digits = Utils.ParseIntToDigits(num.val);
+			ArrayList<Number> adjacentClockwise = new ArrayList<>();
+			ArrayList<Number> adjacentNegative = new ArrayList<>();
+					
+			for (int i = 0; i < DIGIT_COUNT; ++i) {
+				int[] temp_0 = new int[DIGIT_COUNT];
+				int[] temp_1 = new int[DIGIT_COUNT];
+				System.arraycopy(digits, 0, temp_0, 0, DIGIT_COUNT);
+				System.arraycopy(digits, 0, temp_1, 0, DIGIT_COUNT);
+
+				temp_0[i] = (temp_0[i] - 1) % UPPER_BOUNDARY;
+				if (temp_0[i] < 0) temp_0[i] += UPPER_BOUNDARY;
+				
+				temp_1[i] = (temp_1[i] + 1) % UPPER_BOUNDARY;
+				if (temp_1[i] < 0) temp_1[i] += UPPER_BOUNDARY;
+				
+				adjacentNegative.add(new Number(Utils.ParseDigitsToInt(temp_0), distance + 1));
+				adjacentClockwise.add(new Number(Utils.ParseDigitsToInt(temp_1), distance + 1));
+			}
+			
+			++distance;
+			fifo.addAll(adjacentClockwise);
+			fifo.addAll(adjacentNegative);
+		}
+
+		return -1;
+	}
+
+	public static int ParseDigitsToInt(int[] digits) {
+		return ( digits[0]*1000 + digits[1]*100 + digits[2]*10 + digits[3]);
+	}
+
+	public static int[] ParseIntToDigits(int num) {
+		int[] digits = new int[4];
+
+		for (int i = 3; i >=0; --i) {
+			digits[i] = num % 10;
+			num = num / 10;
+		}
+
+		return digits;
+	}
 
 	public static Graph[] initializeTheSafe() {
 		Graph wheel1 = createWheelWithInitialState(10);
 		Graph wheel2 = createWheelWithInitialState(10);
 		Graph wheel3 = createWheelWithInitialState(10);
 		Graph wheel4 = createWheelWithInitialState(10);
-		
+
 		return new Graph[]{
 				wheel1,
 				wheel2,
@@ -32,7 +103,7 @@ public class Utils {
 			removeForbiddenNumbers(safe, i, sources, targets, forbiddens, forbiddenCount);
 			BreadthFirstPaths path = new BreadthFirstPaths(safe[i], sources[i]);
 			safe[i] = createWheelWithInitialState(10);
-			
+
 			if (! path.checkAnyPathTo(targets[i])) continue;
 			else return true;
 		}
@@ -67,23 +138,23 @@ public class Utils {
 
 			if ( (number[wheelNumber] != sources[wheelNumber]) /*&& 
 					(number[wheelNumber] != targets[wheelNumber]) */) {
-				
+
 				cutConnectionBetweenForbiddenEdges(safe[wheelNumber], number[wheelNumber]);
 			}
 		}
 	}
 
-//	public static void removeAllForbiddenNumbers(Graph[] safe, int[] sources, int[] targets, int[][] forbiddens, int forbiddenCount) {
-//		for (int i = 0; i < forbiddenCount; ++i) {
-//			int[] number = forbiddens[i];
-//
-//			for (int j = 0; j < 4; ++j) {
-//				if ((number[j] != sources[j]) || (number[j] != targets[j])) {
-//					cutConnectionBetweenForbiddenEdges(safe[j], number[j]);
-//				}
-//			}
-//		}
-//	}
+	//	public static void removeAllForbiddenNumbers(Graph[] safe, int[] sources, int[] targets, int[][] forbiddens, int forbiddenCount) {
+	//		for (int i = 0; i < forbiddenCount; ++i) {
+	//			int[] number = forbiddens[i];
+	//
+	//			for (int j = 0; j < 4; ++j) {
+	//				if ((number[j] != sources[j]) || (number[j] != targets[j])) {
+	//					cutConnectionBetweenForbiddenEdges(safe[j], number[j]);
+	//				}
+	//			}
+	//		}
+	//	}
 
 	private static void cutConnectionBetweenForbiddenEdges(Graph G, int v) {
 		int w0 = (v-1) % 10;
