@@ -49,7 +49,6 @@ public class Utils {
 				adjacentClockwise.add(new Number(Utils.ParseDigitsToInt(temp_1), distance + 1));
 			}
 			
-			++distance;
 			fifo.addAll(adjacentClockwise);
 			fifo.addAll(adjacentNegative);
 		}
