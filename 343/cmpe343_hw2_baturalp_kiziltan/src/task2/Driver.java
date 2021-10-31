@@ -1,5 +1,6 @@
+package task2;
 
-public class Tester {
+public class Driver {
 
 	public static void main(String[] args) {
 		
