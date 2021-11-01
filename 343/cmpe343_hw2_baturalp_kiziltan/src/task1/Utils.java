@@ -1,12 +1,8 @@
 package task1;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class Utils {
 	
-
-	private static class Number {
+	public static class Number {
 		// This class describes a number with its integer value alongside the distance/step value of
 		// the operation. The operation defines a breadth search algorithm, and this class will be
 		// used as a helper. Because tracing of the current step of operation (distance) value is
@@ -21,56 +17,6 @@ public class Utils {
 		}
 	}
 	
-	public static int BreadthFirstSearch(int src, int tar, ArrayList<Integer> marked) {
-		// highest natural number that is not in the interval [0, 1, 2..., 9], 10
-		final int UPPER_BOUNDARY = 10; // essential for wrap-around cases to evaluate modulus operations
-										
-		// maximum number of digits (wheel count)
-		final int DIGIT_COUNT = 4;			
-		
-		Queue<Number> fifo = new LinkedList<>(); // FIFO (First In First Out) queue for breadth first search implementation 
-		int distance = 0; // describes current step of operation (minimum required trials to open the safe in our case)
-
-		fifo.add(new Number(src, distance)); // add source number to 
-
-		while (fifo.size() > 0) {
-			Number num = fifo.remove();
-			distance = num.dist;
-
-			if (num.val == tar) return distance; 	// target found
-
-			if (marked.contains(num.val)) continue;	// already visited
-
-			marked.add(num.val); // set visited
-			++distance; // increase the current number of steps
-			
-			int[] digits = Utils.ParseIntTo4Digits(num.val);
-			ArrayList<Number> adjacentClockwise = new ArrayList<>();
-			ArrayList<Number> adjacentNegative = new ArrayList<>();
-					
-			for (int i = 0; i < DIGIT_COUNT; ++i) {
-				int[] temp_0 = new int[DIGIT_COUNT];
-				int[] temp_1 = new int[DIGIT_COUNT];
-				System.arraycopy(digits, 0, temp_0, 0, DIGIT_COUNT);
-				System.arraycopy(digits, 0, temp_1, 0, DIGIT_COUNT);
-
-				temp_0[i] = (temp_0[i] - 1) % UPPER_BOUNDARY;
-				if (temp_0[i] < 0) temp_0[i] += UPPER_BOUNDARY;
-				
-				temp_1[i] = (temp_1[i] + 1) % UPPER_BOUNDARY;
-				if (temp_1[i] < 0) temp_1[i] += UPPER_BOUNDARY;
-				
-				adjacentNegative.add(new Number(Utils.Parse4DigitsToInt(temp_0), distance));
-				adjacentClockwise.add(new Number(Utils.Parse4DigitsToInt(temp_1), distance));
-			}
-			
-			fifo.addAll(adjacentClockwise);
-			fifo.addAll(adjacentNegative);
-		}
-
-		return -1;
-	}
-
 	public static int Parse4DigitsToInt(int[] digits) {
 		return ( digits[0]*1000 + digits[1]*100 + digits[2]*10 + digits[3] );
 	}
@@ -100,6 +46,8 @@ public class Utils {
 		return result;
 	}
 	
+//	METHOD 1: 
+//	TODO: cancel and remove the code
 //
 //	public static Graph[] initializeTheSafe() {
 //		Graph wheel1 = createWheelWithInitialState(10);
