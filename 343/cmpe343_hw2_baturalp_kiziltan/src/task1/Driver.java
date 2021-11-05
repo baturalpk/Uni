@@ -6,9 +6,6 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
-		// TODO: Move some utility codes (file io/scanner,...) into Utility class section
-		
-		
 		int[] source = null;
 		int[] target = null;
 		int numberOfForbiddens = 0;
@@ -33,7 +30,10 @@ public class Driver {
 			e.printStackTrace();
 		}
 
-		int result = BreadthFirstSearch.TryToUnlockTheSafe(Utils.Parse4DigitsToInt(source), Utils.Parse4DigitsToInt(target), marked);
+		int result = BreadthFirstSearch.TryToUnlockTheSafe(
+				Utils.Parse4DigitsToInt(source), 
+				Utils.Parse4DigitsToInt(target), 
+				marked);
 		System.out.println(result);
 		
 	}

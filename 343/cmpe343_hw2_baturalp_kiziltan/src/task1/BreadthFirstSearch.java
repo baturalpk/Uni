@@ -37,7 +37,7 @@ public class BreadthFirstSearch {
 			int[] digits = Utils.ParseIntTo4Digits(num.val);
 			ArrayList<Number> adjacentClockwise = new ArrayList<>();
 			ArrayList<Number> adjacentNegative = new ArrayList<>();
-					
+			
 			for (int i = 0; i < DIGIT_COUNT; ++i) {
 				int[] temp_0 = new int[DIGIT_COUNT];
 				int[] temp_1 = new int[DIGIT_COUNT];
@@ -59,5 +59,6 @@ public class BreadthFirstSearch {
 		}
 
 		return -1;
+		
 	}
 }
