@@ -66,7 +66,7 @@ public class Tester {
 		marked.add(3001);
 		
 		int expected = 6;
-		int out = BreadthFirstSearch.TryToUnlockTheSafe(
+		int out = BreadthFirstSearch.DecryptTheSafe(
 				Utils.Parse4DigitsToInt(source), 
 				Utils.Parse4DigitsToInt(target), 
 				marked);

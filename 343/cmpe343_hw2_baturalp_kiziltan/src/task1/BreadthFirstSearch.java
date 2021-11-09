@@ -12,7 +12,7 @@ public class BreadthFirstSearch {
 	// maximum number of digits (wheel count)
 	private static final int DIGIT_COUNT = 4;	
 	
-	public static int TryToUnlockTheSafe(int source, int target, ArrayList<Integer> marked) {
+	public static int DecryptTheSafe(int source, int target, ArrayList<Integer> marked) {
 		return BFS(source, target, marked);
 	}
 

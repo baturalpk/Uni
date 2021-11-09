@@ -40,7 +40,7 @@ public class Utils {
 		return maze;
 	}
 	
-	public static void SearchForCycles(Maze maze) {
+	public static void SearchForCycles(Maze maze) {		
 		int cycleCount = 0, maxLength = 0;
 		
 		for (int i = 0; i < maze.H(); ++i) {
