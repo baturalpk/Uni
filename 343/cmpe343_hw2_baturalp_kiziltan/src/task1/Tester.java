@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: Tester
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 2
+// Description: This class includes test cases for task 1.
+//-----------------------------------------------------
+
 package task1;
 
 import java.util.ArrayList;
@@ -6,6 +15,12 @@ import java.util.Arrays;
 public class Tester {
 
 	public static void main(String[] args) throws Exception {
+        //--------------------------------------------------------
+        // Summary: Executes all tests.
+        // Precondition: args is string array
+        // Postcondition: test results are printed.
+        //--------------------------------------------------------
+		
 		System.out.println("Task 1 - Tests (4) => \n");
 		Execute(Test_Parse4DigitsToInt());
 		Execute(Test_ParseIntTo4Digits());
@@ -13,13 +28,27 @@ public class Tester {
 		Execute(Test_BFS());
 	}
 	
-	public static void Execute(boolean RESULT) {
+	private static void Execute(boolean RESULT) {
+        //--------------------------------------------------------
+        // Summary: Wrapper method to execute and interpret results of
+		// all other test methods.
+        // Precondition: RESULT is a boolean (returned by test methods)
+        // Postcondition: prints success or failed
+        //--------------------------------------------------------
+		
 		System.out.println(RESULT 
 				? ": success\n" 
 				: ": failed\n");
 	}
 	 
-	public static boolean Test_Parse4DigitsToInt() {
+	private static boolean Test_Parse4DigitsToInt() {
+        //--------------------------------------------------------
+        // Summary: Tests Parse4DigitsToInt() method under Utils class
+		// by giving example input and comparing by expected result.
+        // Precondition: 
+        // Postcondition: 
+        //--------------------------------------------------------
+		
 		int[] in = new int[] { 1, 9, 9, 1 };
 		int expected = 1991;
 		
@@ -30,7 +59,14 @@ public class Tester {
 		return expected == out;
 	}
 	
-	public static boolean Test_ParseIntTo4Digits() {
+	private static boolean Test_ParseIntTo4Digits() {
+        //--------------------------------------------------------
+        // Summary: Tests ParseIntTo4Digits() method under Utils class
+		// by giving example input and comparing by expected result.
+        // Precondition: 
+        // Postcondition: 
+        //--------------------------------------------------------
+		
 		int in = 1947;
 		int[] expected = new int[] { 1, 9, 4, 7 };
 		
@@ -43,7 +79,14 @@ public class Tester {
 		return Arrays.compare(expected, out) == 0;
 	}
 	
-	public static boolean Test_ParseStringTo4Digits() throws Exception {
+	private static boolean Test_ParseStringTo4Digits() throws Exception {
+        //--------------------------------------------------------
+        // Summary: Tests ParseStringTo4Digits() method under Utils class
+		// by giving example input and comparing by expected result.
+        // Precondition: 
+        // Postcondition: 
+        //--------------------------------------------------------
+		
 		String in = "4 4 4 4";
 		int[] expected = new int[] { 4, 4, 4, 4 };
 		
@@ -56,7 +99,15 @@ public class Tester {
 		return Arrays.compare(expected, out) == 0;
 	}
 	
-	public static boolean Test_BFS() {
+	private static boolean Test_BFS() {
+        //--------------------------------------------------------
+        // Summary: Mimics the driver class. Gives an example source,
+		// target and forbidden numbers, then executes BFS algorithm.
+		// Lastly compares for expected result by exact test output.
+        // Precondition: - 
+        // Postcondition: test result is printed
+        //--------------------------------------------------------
+		
 		int[] source = new int[] { 1, 0, 0, 0 };
 		int[] target = new int[] { 4, 0, 0, 1 };
 		ArrayList<Integer> marked = new ArrayList<>();

@@ -1,10 +1,26 @@
+//-----------------------------------------------------
+// Title: Driver
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 2
+// Description: Entry point of task 1 app.
+//-----------------------------------------------------
+
 package task1;
 import java.io.File;
 import java.util.*;
 
 public class Driver {
-
+	
 	public static void main(String[] args) {
+        //--------------------------------------------------------
+        // Summary: Creates 2 int array that will contain source and target numbers by digits.
+		// Use an arraylist for marked numbers. Read forbidden numbers from the file and mark as marked.
+		// Send source, target, marked variables into BFS algorithm to decrypt the safe. Print the result.
+        // Precondition: args is string array
+        // Postcondition: Result is found and printed.
+        //--------------------------------------------------------
 		
 		int[] source = null;
 		int[] target = null;

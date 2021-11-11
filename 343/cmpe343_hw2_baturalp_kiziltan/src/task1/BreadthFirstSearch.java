@@ -1,4 +1,12 @@
-// 
+//-----------------------------------------------------
+// Title: Breadth First Search
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 2
+// Description: This class includes BFS algorithm to decrypt the safe.
+//-----------------------------------------------------
+
 package task1;
 
 import java.util.*;
@@ -7,22 +15,40 @@ import task1.Utils.Number;
 
 public class BreadthFirstSearch {
 	
-	// highest natural number that is not in the interval [0, 1, 2..., 9], 10
-	private static final int UPPER_BOUNDARY = 10; // essential for wrap-around cases to evaluate modulus operations
+	// essential for wrap-around cases to evaluate modulus operations
+	private static final int UPPER_BOUNDARY = 10; 
 									
 	// maximum number of digits (wheel count)
 	private static final int DIGIT_COUNT = 4;	
 	
+	
 	public static int DecryptTheSafe(int source, int target, ArrayList<Integer> marked) {
+        //--------------------------------------------------------
+        // Summary: Public wrapper class for internal BFS algorithm.
+        // Precondition: source is int, target is int, marked is integer arraylist
+        // Postcondition: returns integer result of BFS algorithm.
+        //--------------------------------------------------------
+		
 		return BFS(source, target, marked);
 	}
 
 	private static int BFS(int src, int tar, ArrayList<Integer> marked) {
+        //--------------------------------------------------------
+        // Summary: An implementation of Breadth First Search algorithm to solve the decrypt safe problem.
+		// Firstly, adds source number to queue. Enters to BFS main loop until queue gets empty.
+		// In each iteration of the loop, checks whether target is found or currentNumber is already visited.
+		// If it has not visited yet, or is not the target, then adds adjacent versions of current number
+		// by incrementing each digit by 1, and decreasing by 1 (clockwise & negative of clockwise direction)
+		// If the target is found, exits the function by returning the current distance/step.
+		// If the queue gets empty before finding target number, then returns -1.
+        // Precondition: src is int, tar is int, marked is integer arraylist
+        // Postcondition: returns integer (result: minimum required trials to unlock the safe)
+        //--------------------------------------------------------
 		
-		Queue<Number> fifo = new LinkedList<>(); // FIFO (First In First Out) queue for breadth first search implementation 
+		Queue<Number> fifo = new LinkedList<>(); // FIFO (First In First Out) queue.
 		int distance = 0; // describes current step of operation (minimum required trials to open the safe in our case)
 
-		fifo.add(new Number(src, distance)); // add source number to 
+		fifo.add(new Number(src, distance)); // add source number to queue.
 
 		while (fifo.size() > 0) {
 			Number num = fifo.remove();
