@@ -19,7 +19,6 @@ public class Driver {
 			filename = args[0];
 		}
 		
-		
 		try {
 			Scanner fileIO = new Scanner(new File(filename));
 			scheduler = new ProjectScheduler(fileIO);
@@ -32,7 +31,7 @@ public class Driver {
 		
 		Scanner stdIn = new Scanner(System.in);
 		while (true) {
-			System.out.println("Enter choice (0: Exit, 1: List schedule, 2: Check order): ");
+			System.out.printf("Enter choice (0: Exit, 1: List schedule, 2: Check order): ");
 			String line = stdIn.nextLine().trim();
 			
 			int command = -1;
@@ -44,20 +43,24 @@ public class Driver {
 			}
 			
 			switch (command) {
-			case 0:
-				System.exit(0);;
-				break;
-			case 1:
-				scheduler.List();
-				break;
-			case 2:
-				System.out.print("Enter first task: ");
-				String task1 = stdIn.nextLine().trim();
-				System.out.print("Enter second task: ");
-				String task2 = stdIn.nextLine().trim();
-				scheduler.CheckOrder(task1, task2);
-				break;
-			default: System.out.println("Unknown command. Try something else.");
+				case 0:
+					System.exit(0);;
+					break;
+				case 1:
+					scheduler.List();
+					break;
+				case 2:
+					System.out.print("Enter first task: ");
+					String task1 = stdIn.nextLine().trim();
+					System.out.print("Enter second task: ");
+					String task2 = stdIn.nextLine().trim();
+					
+					if (task2.equals(task1)) 
+						System.out.println("Enter a task different than the first one.");
+					
+					scheduler.CheckOrder(task1, task2);
+					break;
+				default: System.out.println("Unknown command. Try something else.");
 			}
 		}
 		
