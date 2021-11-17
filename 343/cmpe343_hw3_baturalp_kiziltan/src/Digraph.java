@@ -6,13 +6,11 @@ public class Digraph {
     private final int V;
     private int E;
     private ArrayList<Integer>[] adj;
-    private int[] indegree;
     
     public Digraph(int V) {
         if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be non-negative");
         this.V = V;
         this.E = 0;
-        indegree = new int[V];
         adj = (ArrayList<Integer>[]) new ArrayList[V];
         for (int v = 0; v < V; v++) {
             adj[v] = new ArrayList<Integer>();
@@ -36,7 +34,6 @@ public class Digraph {
         validateVertex(v);
         validateVertex(w);
         adj[v].add(w);
-        indegree[w]++;
         E++;
     }
 
@@ -50,11 +47,6 @@ public class Digraph {
         return adj[v].size();
     }
 
-    public int indegree(int v) {
-        validateVertex(v);
-        return indegree[v];
-    }
-
     public Digraph reverse() {
         Digraph reverse = new Digraph(V);
         for (int v = 0; v < V; v++) {
@@ -63,6 +55,19 @@ public class Digraph {
             }
         }
         return reverse;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int v = 0; v < V; v++) {
+            s.append(String.format("%d: ", v));
+            for (int w : adj[v]) {
+                s.append(String.format("%d ", w));
+            }
+            s.append("\n");
+        }
+        return s.toString();
     }
 
 }

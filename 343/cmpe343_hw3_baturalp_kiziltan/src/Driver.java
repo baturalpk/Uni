@@ -47,7 +47,7 @@ public class Driver {
 					System.exit(0);;
 					break;
 				case 1:
-					scheduler.List();
+					System.out.println(scheduler.List());
 					break;
 				case 2:
 					System.out.print("Enter first task: ");
@@ -58,7 +58,17 @@ public class Driver {
 					if (task2.equals(task1)) 
 						System.out.println("Enter a task different than the first one.");
 					
-					scheduler.CheckOrder(task1, task2);
+					int result = scheduler.CheckOrder(task1, task2);
+					
+					if (result == 0) {
+						System.out.printf("You should do %s and %s on the same day.\n", task1, task2);
+					}
+					else if (result == 1) {
+						System.out.printf("You should do %s before %s.\n", task1, task2);
+					}
+					else if (result == -1) {
+						System.out.printf("You should do %s after %s.\n", task1, task2);
+					}
 					break;
 				default: System.out.println("Unknown command. Try something else.");
 			}

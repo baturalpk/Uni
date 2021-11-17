@@ -4,16 +4,12 @@ import java.util.*;
 public class ProjectScheduler {
 	
 	private final int jobsPerWeek = 3;
-//	private final int maxWeekCount = 4; // 1 month
+	private ArrayList<String> taskKeys;
 	private Digraph tasks;
 	private Digraph reversedTasks;
-//	private StrongComponents taskGroups;
-//	private TopologicalOrder taskOrders;
-	private ArrayList<String> taskKeys;
-//	private ArrayList<ArrayList<String>> calendar;
 	private int numberOfTasks;
 	private ArrayList<String> calendar;
-	
+
 	public ProjectScheduler(Scanner in) throws Exception {
 		
 		int taskCount = Integer.parseInt(in.nextLine().trim());
@@ -39,8 +35,12 @@ public class ProjectScheduler {
 			reversedTasks.addEdge(w, v);
 		}
 		
-//		taskGroups = new StrongComponents(tasks);
-//		taskOrders = new TopologicalOrder(tasks);
+		DirectedCycle dependencyChecker = new DirectedCycle(tasks);
+		if (dependencyChecker.hasCycle()) {
+			System.err.println("Tasks have cyclic dependency each other. Check validity of input file!");
+			System.exit(1);
+		}
+		
 		createTheCalendar();
 		
 	}
@@ -71,7 +71,7 @@ public class ProjectScheduler {
 		calendar = scheduled;
 	}
 	
-	public void List() {
+	public String List() {
 		StringBuilder calendarStr = new StringBuilder();
 		
 		int week = 0;
@@ -88,10 +88,10 @@ public class ProjectScheduler {
 			++taskAtTheWeek;
 		}
 		
-		System.out.println(calendarStr.toString());
+		return calendarStr.toString();
 	}
 	
-	public void CheckOrder(String firstTask, String secondTask) {
+	public int CheckOrder(String firstTask, String secondTask) {
 		int v = taskKeys.indexOf(firstTask);
 		int w = taskKeys.indexOf(secondTask);
 		boolean errorFlag = false;
@@ -106,21 +106,33 @@ public class ProjectScheduler {
 			errorFlag = true;
 		}
 		
-		if (errorFlag) return;
+		if (errorFlag) return -9;
 		
 		int precedenceV = calendar.indexOf(firstTask);
 		int precedenceW = calendar.indexOf(secondTask);
 		
-		if (precedenceV/jobsPerWeek == precedenceW/jobsPerWeek) {
-			System.out.printf("You should do %s and %s on the same day.\n", firstTask, secondTask);
-		}
-		else if (precedenceV < precedenceW) {
-			System.out.printf("You should do %s before %s.\n", firstTask, secondTask);
-		}
-		else {
-			System.out.printf("You should do %s after %s.\n", firstTask, secondTask);
-			
-		}
-		
+		if (precedenceV/jobsPerWeek == precedenceW/jobsPerWeek) return 0;
+		else if (precedenceV < precedenceW) 					return 1;
+		else 													return -1;
+	}
+	
+	public ArrayList<String> getTaskKeys() {
+		return taskKeys;
+	}
+
+	public Digraph getTasks() {
+		return tasks;
+	}
+
+	public Digraph getReversedTasks() {
+		return reversedTasks;
+	}
+
+	public int getNumberOfTasks() {
+		return numberOfTasks;
+	}
+	
+	public ArrayList<String> getCalendar() {
+		return this.calendar;
 	}
 }
