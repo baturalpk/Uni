@@ -17,9 +17,10 @@ public class DepthFirstOrder {
 
     public DepthFirstOrder(Digraph G) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initialize member variables and run DFS algorithm to find
+    	// postorder form.
+    	// Precondition: G is directed graph
+    	// Postcondition: postorder found
     	//--------------------------------------------------------
         post   = new int[G.V()];
         postorder = new LinkedList<Integer>();
@@ -30,9 +31,9 @@ public class DepthFirstOrder {
 
     private void dfs(Digraph G, int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: DFS algorithm implementation to mark postorder form.
+    	// Precondition: G is directed graph, v is integer
+    	// Postcondition: some vertices marked and added into postorder
     	//--------------------------------------------------------
         marked[v] = true;
         for (int w : G.adj(v)) {
@@ -46,9 +47,7 @@ public class DepthFirstOrder {
 
     public Iterable<Integer> post() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Getter for postorder.
     	//--------------------------------------------------------
         return postorder;
     }

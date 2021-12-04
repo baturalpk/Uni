@@ -17,9 +17,9 @@ public class DirectedCycle {
 
     public DirectedCycle(Digraph G) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: initilize all member variables and run dfs to find a cycle
+    	// Precondition: G is directed graph
+    	// Postcondition: member variables are init. and found a cycle or not
     	//--------------------------------------------------------
         marked  = new boolean[G.V()];
         onStack = new boolean[G.V()];
@@ -30,9 +30,9 @@ public class DirectedCycle {
 
     private void dfs(Digraph G, int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Runs a DFS algorithm to detect a cycle
+    	// Precondition: G is directed graph, v is integer
+    	// Postcondition: cycle is detected or could not detect
     	//--------------------------------------------------------
         onStack[v] = true;
         marked[v] = true;
@@ -54,14 +54,13 @@ public class DirectedCycle {
                 cycle.push(v);
             }
         }
+        
         onStack[v] = false;
     }
 
     public boolean hasCycle() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Returns whether any cycle is found or not
     	//--------------------------------------------------------
         return cycle != null;
     }

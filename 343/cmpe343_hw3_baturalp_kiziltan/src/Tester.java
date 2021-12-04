@@ -17,117 +17,11 @@ public class Tester {
 	private static int testCaseCount = 0;
 	private static int passed = 0;
 	
-	private static void ExecuteNewTest(
-		int ID,
-		Scanner fileIO,
-		String expectedKeys,
-		String expectedDependencies,
-		int expectedTaskCount,
-		Calendar4 expectedCalendar
-	) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		
-		++testGroupCount;
-		System.out.println("### TEST " + ID + " ###\n");
-		ProjectScheduler scheduler = null;
-		try {
-			scheduler = new ProjectScheduler(fileIO);
-		} catch (Exception e) {
-			System.out.println("Failed to initialize Project Scheduler. Check correctness of input file.");
-			System.out.println("REASON: " + e.toString());
-		}
-		
-		Run(checkTaskKeys		(scheduler.getTaskKeys().toString(), expectedKeys));
-		Run(checkDependencyList (scheduler.getTasks().toString(), 	 expectedDependencies));
-		Run(checkNumberOfTasks 	(scheduler.getNumberOfTasks(), 		 expectedTaskCount));
-		Run(checkCalendar 		(scheduler.getCalendar(), 			 expectedCalendar));
-	}
-	
-	private static void Run(boolean result) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		++testCaseCount;
-		if (result == true) ++passed;
-		System.out.println((result)
-			? "\t--> successful ✔\n"
-			: "\t--> failed ✘\n"
-		);
-	}
-	
-	private static boolean Check(int in, int expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("Result: \n" + in);
-		System.out.println("Expected: \n" + expected);
-		return in == expected;
-	}
-	
-	private static boolean Check(Object in, Object expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("Result: \n" + in);
-		System.out.println("Expected: \n" + expected);
-		return in.equals(expected);
-	}
-	
-	private static boolean checkTaskKeys(String in, String expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("* Test 'Check Task Keys': ");
-		return Check(in, expected);
-	}
-	
-	private static boolean checkDependencyList(String in, String expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("* Test 'Check Dependency List': ");
-		return Check(in, expected);
-	}
-	
-	private static boolean checkNumberOfTasks(int in, int expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("* Test 'Check Number of Tasks': ");
-		return Check(in, expected);
-	}
-	
-	private static boolean checkCalendar(Calendar4 in, Calendar4 expected) {
-		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
-		//--------------------------------------------------------
-		System.out.println("* Test 'Check Calendar': ");
-		return Check(in, expected);
-	}
-	
 	public static void main(String[] args) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Entry point of Tester class. Creates a new test, executes it, and prints results
+		// Precondition: args is string array
+		// Postcondition: test report is printed with details
 		//--------------------------------------------------------
 		try {
 			ExecuteNewTest(
@@ -152,6 +46,114 @@ public class Tester {
 		System.out.println("* Executed " + testGroupCount + " different test(s).");
 		System.out.println("* There were total number of " + testCaseCount + " test cases.");
 		System.out.printf("✔ Passed \"%d\" of %d cases.\n", passed, testCaseCount);
+	}
+	
+	private static void ExecuteNewTest(
+		int ID,
+		Scanner fileIO,
+		String expectedKeys,
+		String expectedDependencies,
+		int expectedTaskCount,
+		Calendar4 expectedCalendar
+	) {
+		//--------------------------------------------------------
+		// Summary: creates a new test and runs comparison methods
+		// Precondition: ID, expectedTaskCount are integers and 
+		// fileIO, expectedKeys, expectedDependencies are strings and
+		// expectedCalendar is Calendar4 instance
+		// Postcondition: prints comparison results with some details
+		//--------------------------------------------------------
+		
+		++testGroupCount;
+		System.out.println("### TEST " + ID + " ###\n");
+		ProjectScheduler scheduler = null;
+		try {
+			scheduler = new ProjectScheduler(fileIO);
+		} catch (Exception e) {
+			System.out.println("Failed to initialize Project Scheduler. Check correctness of input file.");
+			System.out.println("REASON: " + e.toString());
+		}
+		
+		Run(checkTaskKeys		(scheduler.getTaskKeys().toString(), expectedKeys));
+		Run(checkDependencyList (scheduler.getTasks().toString(), 	 expectedDependencies));
+		Run(checkNumberOfTasks 	(scheduler.getNumberOfTasks(), 		 expectedTaskCount));
+		Run(checkCalendar 		(scheduler.getCalendar(), 			 expectedCalendar));
+	}
+	
+	private static void Run(boolean result) {
+		//--------------------------------------------------------
+		// Summary: wrapper method for the checker functions
+		// Precondition: result is boolean
+		// Postcondition: prints success or failure
+		//--------------------------------------------------------
+		++testCaseCount;
+		if (result == true) ++passed;
+		System.out.println((result)
+			? "\t--> successful ✔\n"
+			: "\t--> failed ✘\n"
+		);
+	}
+	
+	private static boolean Check(int in, int expected) {
+		//--------------------------------------------------------
+		// Summary: compares two integers.
+		// Precondition: in, expected are integers
+		// Postcondition: returns comparison of two integers.
+		//--------------------------------------------------------
+		System.out.println("Result: \n" + in);
+		System.out.println("Expected: \n" + expected);
+		return in == expected;
+	}
+	
+	private static boolean Check(Object in, Object expected) {
+		//--------------------------------------------------------
+		// Summary: compares two objects.
+		// Precondition: in, expected are objects.
+		// Postcondition:  returns comparison of two objects.
+		//--------------------------------------------------------
+		System.out.println("Result: \n" + in);
+		System.out.println("Expected: \n" + expected);
+		return in.equals(expected);
+	}
+	
+	private static boolean checkTaskKeys(String in, String expected) {
+		//--------------------------------------------------------
+		// Summary: compares two variables for "TaskKeys"
+		// Precondition: in, expected are strings
+		// Postcondition: returns comparison result as boolean
+		//--------------------------------------------------------
+		System.out.println("* Test 'Check Task Keys': ");
+		return Check(in, expected);
+	}
+	
+	private static boolean checkDependencyList(String in, String expected) {
+		//--------------------------------------------------------
+		// Summary: compares two variables for "DependencyList"
+		// Precondition: in, expected are strings
+		// Postcondition: returns comparison result as boolean
+		//--------------------------------------------------------
+		System.out.println("* Test 'Check Dependency List': ");
+		return Check(in, expected);
+	}
+	
+	private static boolean checkNumberOfTasks(int in, int expected) {
+		//--------------------------------------------------------
+		// Summary: compares two variables for "NumberOfTasks"
+		// Precondition: in, expected are integers
+		// Postcondition: returns comparison result as boolean
+		//--------------------------------------------------------
+		System.out.println("* Test 'Check Number of Tasks': ");
+		return Check(in, expected);
+	}
+	
+	private static boolean checkCalendar(Calendar4 in, Calendar4 expected) {
+		//--------------------------------------------------------
+		// Summary: compares two variables for "Calendar"
+		// Precondition: in, expected are Calendar4 instances
+		// Postcondition: returns comparison result as boolean
+		//--------------------------------------------------------
+		System.out.println("* Test 'Check Calendar': ");
+		return Check(in, expected);
 	}
 	
 }

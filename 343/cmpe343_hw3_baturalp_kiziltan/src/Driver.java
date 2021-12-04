@@ -15,8 +15,11 @@ public class Driver {
 	public static void main(String[] args) {
 		//--------------------------------------------------------
 		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// 	1- Read filename
+		// 	2- Open file and create a Project Scheduler instance with file contents
+		// 	3- Start event loop and wait user to make a choice (Exit, List, CheckOrder)
+		// Precondition: args is string array
+		// Postcondition: schedule is created and user actions are processed
 		//--------------------------------------------------------
 		
 		ProjectScheduler scheduler = null;

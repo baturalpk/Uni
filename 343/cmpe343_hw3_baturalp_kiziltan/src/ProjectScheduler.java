@@ -139,9 +139,9 @@ public class ProjectScheduler {
 	
 	public String List() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: build a table representation of the calendar as string 
+		// Precondition: -
+		// Postcondition: returns string view of the calendar
 		//--------------------------------------------------------
 		StringBuilder calendarStr = new StringBuilder();
 		
@@ -165,9 +165,14 @@ public class ProjectScheduler {
 	
 	public int CheckOrder(String firstTask, String secondTask) {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Checks if there is a project with the given task names. Then,
+		// if there is no projects with one of them, returns "-9". Otherwise compares
+		// them according to week number and returns ==>
+		// 	*  0, if week numbers are equal,
+		// 	*  1, if first task is before the second one
+		// 	* -1, if first task is after the second one
+		// Precondition: firstTask, secondTask are strings
+		// Postcondition: returns a integer flag according to the comparison result
 		//--------------------------------------------------------
 		int v = taskKeys.indexOf(firstTask);
 		int w = taskKeys.indexOf(secondTask);
@@ -195,36 +200,28 @@ public class ProjectScheduler {
 	
 	public ArrayList<String> getTaskKeys() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Getter for task names
 		//--------------------------------------------------------
 		return taskKeys;
 	}
 
 	public Digraph getTasks() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Getter for task digraph
 		//--------------------------------------------------------
 		return tasks;
 	}
 
 	public int getNumberOfTasks() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Getter for task count
 		//--------------------------------------------------------
 		return numberOfTasks;
 	}
 	
 	public Calendar4 getCalendar() {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Getter for calendar instance
 		//--------------------------------------------------------
 		return this.calendar;
 	}
