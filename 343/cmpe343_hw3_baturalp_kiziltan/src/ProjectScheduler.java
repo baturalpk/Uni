@@ -71,8 +71,16 @@ public class ProjectScheduler {
 	private void buildCalendar(Iterable<Integer> postOrder) {
 		//--------------------------------------------------------
 		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// 0- upperWeek is used to follow the week number of the vertex will be added to the calendar 
+		// 1- Iterate over postOrder form of tasks digraph
+		// 2- If the current vertex's outdegree is 0 resets upperWeek to 4 since it is on top of hierarchy. Otherwise its parent - 1 
+		// (Note: hierarchly top vertices will be added to last week (4th) since they will be completed last and their dependencies/children into previous weeks)
+		// 3- Adds the current vertex into calendar
+		// 4- Decreases upperWeek value
+		// 5- Stores current value of upperWeek with 2 instances (initMaxWeek, maxWeek)
+		// 6- Iterates over adjacency list of the current vertex and puts them into calendar by decreasing week number in each step (wrap ups if week number decreases below 0)
+		// Precondition: postOrder is integer iterable
+		// Postcondition: the calendar is built/scheduled
 		//--------------------------------------------------------
 		
 		/*
@@ -100,7 +108,6 @@ public class ProjectScheduler {
 		int upperWeek = totalWeekCount;
 		
 		for (int v: postOrder) {
-			if (calendar.size() >= numberOfTasks) break;
 			if (calendar.contains(v)) continue;
 			
 			if (tasks.outdegree(v) == 0) {
