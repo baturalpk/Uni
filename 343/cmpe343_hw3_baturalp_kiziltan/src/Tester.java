@@ -1,3 +1,11 @@
+//-----------------------------------------------------
+// Title: Tester
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class contains testing utilities.
+//-----------------------------------------------------
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +25,12 @@ public class Tester {
 		int expectedTaskCount,
 		Calendar4 expectedCalendar
 	) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		++testGroupCount;
 		System.out.println("### TEST " + ID + " ###\n");
 		ProjectScheduler scheduler = null;
@@ -34,6 +48,11 @@ public class Tester {
 	}
 	
 	private static void Run(boolean result) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		++testCaseCount;
 		if (result == true) ++passed;
 		System.out.println((result)
@@ -43,38 +62,73 @@ public class Tester {
 	}
 	
 	private static boolean Check(int in, int expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("Result: \n" + in);
 		System.out.println("Expected: \n" + expected);
 		return in == expected;
 	}
 	
 	private static boolean Check(Object in, Object expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("Result: \n" + in);
 		System.out.println("Expected: \n" + expected);
 		return in.equals(expected);
 	}
 	
 	private static boolean checkTaskKeys(String in, String expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("* Test 'Check Task Keys': ");
 		return Check(in, expected);
 	}
 	
 	private static boolean checkDependencyList(String in, String expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("* Test 'Check Dependency List': ");
 		return Check(in, expected);
 	}
 	
 	private static boolean checkNumberOfTasks(int in, int expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("* Test 'Check Number of Tasks': ");
 		return Check(in, expected);
 	}
 	
 	private static boolean checkCalendar(Calendar4 in, Calendar4 expected) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		System.out.println("* Test 'Check Calendar': ");
 		return Check(in, expected);
 	}
 	
 	public static void main(String[] args) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		try {
 			ExecuteNewTest(
 					1, 

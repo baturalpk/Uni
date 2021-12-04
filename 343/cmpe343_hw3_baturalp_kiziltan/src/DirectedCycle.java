@@ -1,3 +1,11 @@
+//-----------------------------------------------------
+// Title: Directed Cycle
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class defines directed cycle detection utilities.
+//-----------------------------------------------------
 
 import java.util.*;
 
@@ -8,6 +16,11 @@ public class DirectedCycle {
     private Stack<Integer> cycle;
 
     public DirectedCycle(Digraph G) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         marked  = new boolean[G.V()];
         onStack = new boolean[G.V()];
         edgeTo  = new int[G.V()];
@@ -16,6 +29,11 @@ public class DirectedCycle {
     }
 
     private void dfs(Digraph G, int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         onStack[v] = true;
         marked[v] = true;
         for (int w : G.adj(v)) {
@@ -40,11 +58,12 @@ public class DirectedCycle {
     }
 
     public boolean hasCycle() {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         return cycle != null;
-    }
-
-    public Iterable<Integer> cycle() {
-        return cycle;
     }
 
 }

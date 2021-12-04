@@ -1,3 +1,11 @@
+//-----------------------------------------------------
+// Title: Driver
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class is the entry-point of application.
+//-----------------------------------------------------
 
 import java.io.File;
 import java.util.*;
@@ -5,6 +13,11 @@ import java.util.*;
 public class Driver {
 
 	public static void main(String[] args) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		
 		ProjectScheduler scheduler = null;
 		String filename = null;

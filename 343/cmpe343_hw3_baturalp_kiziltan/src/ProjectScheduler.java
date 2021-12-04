@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: Project Scheduler
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class defines a project scheduler to create a calendar
+// 				with proper order of jobs.
+//-----------------------------------------------------
 
 import java.util.*;
 
@@ -14,6 +23,11 @@ public class ProjectScheduler {
 	private Calendar4 calendar;
 
 	public ProjectScheduler(Scanner in) throws Exception {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		
 		int taskCount = Integer.parseInt(in.nextLine().trim());
 		tasks = new Digraph(taskCount);
@@ -55,6 +69,12 @@ public class ProjectScheduler {
 	}
 	
 	private void buildCalendar(Iterable<Integer> postOrder) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
+		
 		/*
 		 * 0) Create a list for each week (totally 4). => (Create "Calendar" class and 
 		 *    add util. methods like "contains(x)").
@@ -118,6 +138,11 @@ public class ProjectScheduler {
 	}
 	
 	public String List() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		StringBuilder calendarStr = new StringBuilder();
 		
 		int week = 0;
@@ -139,6 +164,11 @@ public class ProjectScheduler {
 	}
 	
 	public int CheckOrder(String firstTask, String secondTask) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		int v = taskKeys.indexOf(firstTask);
 		int w = taskKeys.indexOf(secondTask);
 		boolean errorFlag = false;
@@ -164,22 +194,38 @@ public class ProjectScheduler {
 	}
 	
 	public ArrayList<String> getTaskKeys() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return taskKeys;
 	}
 
 	public Digraph getTasks() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return tasks;
 	}
 
-	public Digraph getReversedTasks() {
-		return reversedTasks;
-	}
-
 	public int getNumberOfTasks() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return numberOfTasks;
 	}
 	
 	public Calendar4 getCalendar() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return this.calendar;
 	}
 	

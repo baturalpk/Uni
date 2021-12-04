@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: Depth First Order
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class contains postorder using DFS definition.
+//-----------------------------------------------------
+
 import java.util.*;
 
 public class DepthFirstOrder {
@@ -7,6 +16,11 @@ public class DepthFirstOrder {
     private int postCounter;
 
     public DepthFirstOrder(Digraph G) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         post   = new int[G.V()];
         postorder = new LinkedList<Integer>();
         marked    = new boolean[G.V()];
@@ -15,6 +29,11 @@ public class DepthFirstOrder {
     }
 
     private void dfs(Digraph G, int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         marked[v] = true;
         for (int w : G.adj(v)) {
             if (!marked[w]) {
@@ -25,18 +44,12 @@ public class DepthFirstOrder {
         post[v] = postCounter++;
     }
 
-    public int post(int v) {
-        validateVertex(v);
-        return post[v];
-    }
-
     public Iterable<Integer> post() {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
         return postorder;
-    }
-
-    private void validateVertex(int v) {
-        int V = marked.length;
-        if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
 }

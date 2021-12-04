@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: Calendar4
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 3
+// Description: This class describes a calendar which contains 4 weeks.
+//-----------------------------------------------------
+
 import java.util.*;
 
 public class Calendar4 {
@@ -5,15 +14,28 @@ public class Calendar4 {
 	private ArrayList<Integer> week2;
 	private ArrayList<Integer> week3;
 	private ArrayList<Integer> week4;
-	
+
 	public Calendar4() {
+		//--------------------------------------------------------
+		// Summary: Default constructor that initializes member variables
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		week1 = new ArrayList<>();
 		week2 = new ArrayList<>();
 		week3 = new ArrayList<>();
 		week4 = new ArrayList<>();
 	}
 	
+	// Extended constructor
+	
 	public Calendar4(int w1[], int w2[], int w3[], int w4[]) {
+		//--------------------------------------------------------
+		// Summary: Extended constructor that initializes member variables
+		// with given values.
+		// Precondition: w1, w2, w3, w4 are integer arrays
+		// Postcondition: 
+		//--------------------------------------------------------
 		this();
 		for (int v: w1) week1.add(v);
 		for (int v: w2) week2.add(v);
@@ -21,24 +43,13 @@ public class Calendar4 {
 		for (int v: w4) week4.add(v);
 	}
 	
-	public void addToWeek1(int v) {
-		week1.add(v);
-	}
-	
-	public void addToWeek2(int v) {
-		week2.add(v);
-	}
-	
-	public void addToWeek3(int v) {
-		week3.add(v);
-	}
-	
-	public void addToWeek4(int v) {
-		week4.add(v);
-	}
-	
 	@Override
 	public boolean equals(Object o) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		if (o == this) return true;
 		else {
 			Calendar4 other = (Calendar4) o;
@@ -48,6 +59,11 @@ public class Calendar4 {
 	}
 	
 	public ArrayList<Integer> getWeek(int week) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		switch (week) {
 			case 1: return week1;
 			case 2: return week2;
@@ -59,15 +75,30 @@ public class Calendar4 {
 	}
 	
 	public boolean contains(int v) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return week1.contains(v) || week2.contains(v)
 				|| week3.contains(v) || week4.contains(v);
 	}
 	
 	public int size() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		return (week1.size() + week2.size() + week3.size() + week4.size());
 	}
 	
 	public int weekOfTask(int v) {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		if (week1.contains(v)) return 1;
 		if (week2.contains(v)) return 2;
 		if (week3.contains(v)) return 3;
@@ -75,6 +106,11 @@ public class Calendar4 {
 	}
 
 	public ArrayList<Integer> getCalendarAsOneList() {
+		//--------------------------------------------------------
+		// Summary: 
+		// Precondition: 
+		// Postcondition: 
+		//--------------------------------------------------------
 		ArrayList<Integer> all = new ArrayList<>();
 		all.addAll(week1);
 		all.addAll(week2);
