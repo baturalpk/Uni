@@ -8,12 +8,11 @@ public class Driver {
 		
 		ProjectScheduler scheduler = null;
 		String filename = null;
+		Scanner stdIn = new Scanner(System.in);
 		
 		if (args.length <= 0) {
-			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter the input filename: ");
-			filename = sc.nextLine().trim();
-			sc.close();
+			filename = stdIn.nextLine().trim();
 		}
 		else {
 			filename = args[0];
@@ -26,10 +25,10 @@ public class Driver {
 		} catch (Exception e) {
 			System.out.println("Failed to initialize Project Scheduler:");
 			System.out.println("\t- Check input source");
+			stdIn.close();
 			e.printStackTrace();
 		}
 		
-		Scanner stdIn = new Scanner(System.in);
 		while (true) {
 			System.out.printf("Enter choice (0: Exit, 1: List schedule, 2: Check order): ");
 			String line = stdIn.nextLine().trim();
@@ -39,12 +38,14 @@ public class Driver {
 				command = Integer.parseInt(line);
 			} 
 			catch (NumberFormatException e) {
-				System.out.println("Invalid command. Type only numbers [0-2]");
+				System.out.println("Invalid command. Type only numbers [0-2].");
+				continue;
 			}
 			
 			switch (command) {
 				case 0:
-					System.exit(0);;
+					stdIn.close();
+					System.exit(0);
 					break;
 				case 1:
 					System.out.println(scheduler.List());
@@ -73,7 +74,6 @@ public class Driver {
 				default: System.out.println("Unknown command. Try something else.");
 			}
 		}
-		
 	}
 
 }

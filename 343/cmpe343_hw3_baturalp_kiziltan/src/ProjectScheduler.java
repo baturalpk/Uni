@@ -4,11 +4,14 @@ import java.util.*;
 public class ProjectScheduler {
 	
 	private final int jobsPerWeek = 3;
+	private final int totalWeekCount = 4;
+	private final int MAX_JOB_LIMIT = jobsPerWeek * totalWeekCount;
+	
 	private ArrayList<String> taskKeys;
 	private Digraph tasks;
 	private Digraph reversedTasks;
 	private int numberOfTasks;
-	private ArrayList<String> calendar;
+	private Calendar4 calendar;
 
 	public ProjectScheduler(Scanner in) throws Exception {
 		
@@ -17,6 +20,12 @@ public class ProjectScheduler {
 		reversedTasks = new Digraph(taskCount);
 		taskKeys = new ArrayList<>(taskCount);
 		numberOfTasks = taskCount;
+		
+		if (numberOfTasks > MAX_JOB_LIMIT) {
+			System.err.println("The number of tasks exceeds maximum limit (given 1 month for 3 jobs per week)"
+					+ "\n Check validity of input file!");
+			System.exit(1);
+		}
 		
 		// Read & save name of tasks
 		for (int i = 0; i < taskCount; ++i) {
@@ -41,13 +50,11 @@ public class ProjectScheduler {
 			System.exit(1);
 		}
 		
-		Topological topological = new Topological(tasks);
-		topological.order().forEach(e -> {
-			System.out.println(e);
-		});
-		
-		// createTheCalendar();
-		
+		calendar = new Calendar4();
+		buildCalendar(new DepthFirstOrder(tasks).post());
+	}
+	
+	private void buildCalendar(Iterable<Integer> postOrder) {
 		/*
 		 * 0) Create a list for each week (totally 4). => (Create "Calendar" class and 
 		 *    add util. methods like "contains(x)").
@@ -70,32 +77,44 @@ public class ProjectScheduler {
 		 * 
 		 * */
 		
-	}
-	
-	private void createTheCalendar() {
-		ArrayList<String> scheduled = new ArrayList<>();
-		ArrayList<Integer> marked = new ArrayList<>();
+		int upperWeek = totalWeekCount;
 		
-		for (int v = 0; v < numberOfTasks; ++v) {
-						
-			int dependencyCount = reversedTasks.outdegree(v);
+		for (int v: postOrder) {
+			if (calendar.size() >= numberOfTasks) break;
+			if (calendar.contains(v)) continue;
 			
-			if (dependencyCount != 0) {
-				for (int w: reversedTasks.adj(v)) {
-					if (! marked.contains(w)) {
-						scheduled.add(taskKeys.get(w));
-						marked.add(w);
-					}
-				}
+			if (tasks.outdegree(v) == 0) {
+				upperWeek = totalWeekCount;
+			} else {
+				ArrayList<Integer> parent = (ArrayList<Integer>) tasks.adj(v);
+				upperWeek = calendar.weekOfTask(parent.get(0)) - 1;
 			}
 			
-			if (! marked.contains(v)) {
-				scheduled.add(taskKeys.get(v));
-				marked.add(v);
+			if (calendar.getWeek(upperWeek).size() >= jobsPerWeek) {
+				--upperWeek;
+			}
+			
+			calendar.getWeek(upperWeek).add(v);
+			--upperWeek;
+			
+			int initMaxWeek = upperWeek;
+			int maxWeek = upperWeek;
+			for (int w: reversedTasks.adj(v)) {
+				if (calendar.contains(w)) continue;
+				
+				if (maxWeek <= 0) {
+					maxWeek = initMaxWeek;
+				}
+				
+				if (calendar.getWeek(maxWeek).size() >= jobsPerWeek) {
+					--maxWeek;
+				}
+					
+				calendar.getWeek(maxWeek).add(w);
+				--maxWeek;
 			}
 		}
 		
-		calendar = scheduled;
 	}
 	
 	public String List() {
@@ -103,7 +122,8 @@ public class ProjectScheduler {
 		
 		int week = 0;
 		int taskAtTheWeek = jobsPerWeek + 1;
-		for (String task: calendar) {
+		for (int taskIndex: calendar.getCalendarAsOneList()) {
+			String task = taskKeys.get(taskIndex);
 			if (taskAtTheWeek == (jobsPerWeek+1)) {
 				if (week != 0) calendarStr.append("\n");
 				++week;
@@ -135,12 +155,12 @@ public class ProjectScheduler {
 		
 		if (errorFlag) return -9;
 		
-		int precedenceV = calendar.indexOf(firstTask);
-		int precedenceW = calendar.indexOf(secondTask);
+		int precedenceV = calendar.weekOfTask(v);
+		int precedenceW = calendar.weekOfTask(w);
 		
-		if (precedenceV/jobsPerWeek == precedenceW/jobsPerWeek) return 0;
-		else if (precedenceV < precedenceW) 					return 1;
-		else 													return -1;
+		if 		(precedenceV == precedenceW) return 0;
+		else if (precedenceV < precedenceW)  return 1;
+		else								 return -1;
 	}
 	
 	public ArrayList<String> getTaskKeys() {
@@ -159,7 +179,8 @@ public class ProjectScheduler {
 		return numberOfTasks;
 	}
 	
-	public ArrayList<String> getCalendar() {
+	public Calendar4 getCalendar() {
 		return this.calendar;
 	}
+	
 }
