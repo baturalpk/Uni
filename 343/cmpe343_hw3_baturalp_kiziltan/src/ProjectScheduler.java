@@ -24,9 +24,10 @@ public class ProjectScheduler {
 
 	public ProjectScheduler(Scanner in) throws Exception {
 		//--------------------------------------------------------
-		// Summary: 
-		// Precondition: 
-		// Postcondition: 
+		// Summary: Reads tasks and their dependencies from a file. Checks for cycles and
+		// validity of number of tasks. Initializes and builds a calendar for scheduling.
+		// Precondition: in is scanner object
+		// Postcondition: all member variables are initialized, the calendar is build/scheduled
 		//--------------------------------------------------------
 		
 		int taskCount = Integer.parseInt(in.nextLine().trim());
@@ -82,28 +83,6 @@ public class ProjectScheduler {
 		// Precondition: postOrder is integer iterable
 		// Postcondition: the calendar is built/scheduled
 		//--------------------------------------------------------
-		
-		/*
-		 * 0) Create a list for each week (totally 4). => (Create "Calendar" class and 
-		 *    add util. methods like "contains(x)").
-		 * 1) Get topological order of tasks.
-		 * 2) Get reversedTasks.
-		 * 3) Iterate over topological order of tasks from the highest
-		 *    (in each step check whether it is in the calendar or not).
-		 * 4) Add the current vertex into calendar (check outdegree from tasks and
-		 *    if outdeg=0, then it means it is the highest order, and add into week4)
-		 * 5) Check adjacent elements of the current vertex, using reversedTasks.
-		 * 6) Distribute adjacent vertices into stacks up to 4, wrap up 
-		 * 	  and distribute the remaining if the count's higher than 4.
-		 *    ! NOTE: First put the current vertex into last week => week4, and distribute
-		 *    the remaining by starting from (last-1). week => week3. So after putting an element
-		 *    decrease maxweek.
-		 *    ! NOTE 2: The wrapping up process will be determined depending on the current vertex,
-		 *    for example if the current vertex has adjacent elements & the current vertex is already
-		 *    in the calendar, then set this vertex's week as max week and add the adjacent ones up to 
-		 *    the max week (excluding the max week itself)
-		 * 
-		 * */
 		
 		int upperWeek = totalWeekCount;
 		
@@ -200,8 +179,8 @@ public class ProjectScheduler {
 		int precedenceV = calendar.weekOfTask(v);
 		int precedenceW = calendar.weekOfTask(w);
 		
-		if 		(precedenceV == precedenceW) return 0;
-		else if (precedenceV < precedenceW)  return 1;
+		if 		(precedenceV == precedenceW) return  0;
+		else if (precedenceV < precedenceW)  return  1;
 		else								 return -1;
 	}
 	
