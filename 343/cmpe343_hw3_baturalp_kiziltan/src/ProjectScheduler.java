@@ -13,19 +13,19 @@ import java.util.*;
 public class ProjectScheduler {
 	
 	private final int jobsPerWeek = 3;
-	private final int totalWeekCount = 4;
-	private final int MAX_JOB_LIMIT = jobsPerWeek * totalWeekCount;
+	private final int minTotalWeekCount = 4;
 	
 	private ArrayList<String> taskKeys;
 	private Digraph tasks;
 	private Digraph reversedTasks;
 	private int numberOfTasks;
-	private Calendar4 calendar;
+	private int totalWeekCount;
+	private Calendar calendar;
 
 	public ProjectScheduler(Scanner in) throws Exception {
 		//--------------------------------------------------------
-		// Summary: Reads tasks and their dependencies from a file. Checks for cycles and
-		// validity of number of tasks. Initializes and builds a calendar for scheduling.
+		// Summary: Reads tasks and their dependencies from a file. Initializes and builds a 
+		// calendar for scheduling.
 		// Precondition: in is scanner object
 		// Postcondition: all member variables are initialized, the calendar is build/scheduled
 		//--------------------------------------------------------
@@ -35,12 +35,11 @@ public class ProjectScheduler {
 		reversedTasks = new Digraph(taskCount);
 		taskKeys = new ArrayList<>(taskCount);
 		numberOfTasks = taskCount;
-		
-		if (numberOfTasks > MAX_JOB_LIMIT) {
-			System.err.println("The number of tasks exceeds maximum limit (given 1 month for 3 jobs per week)"
-					+ "\n Check validity of input file!");
-			System.exit(1);
-		}
+		int possibleTotalWeekCount = (int) Math.ceil((double)numberOfTasks / (double)jobsPerWeek);
+		if (possibleTotalWeekCount > minTotalWeekCount)
+			totalWeekCount = possibleTotalWeekCount;
+		else
+			totalWeekCount = minTotalWeekCount;
 		
 		// Read & save name of tasks
 		for (int i = 0; i < taskCount; ++i) {
@@ -65,7 +64,7 @@ public class ProjectScheduler {
 			System.exit(1);
 		}
 		
-		calendar = new Calendar4();
+		calendar = new Calendar(totalWeekCount);
 		buildCalendar(new DepthFirstOrder(tasks).post());
 	}
 	
@@ -93,14 +92,14 @@ public class ProjectScheduler {
 				upperWeek = totalWeekCount;
 			} else {
 				ArrayList<Integer> parent = (ArrayList<Integer>) tasks.adj(v);
-				upperWeek = calendar.weekOfTask(parent.get(0)) - 1;
+				upperWeek = calendar.getWeekNoOfTheTask(parent.get(0)) - 1;
 			}
 			
 			if (calendar.getWeek(upperWeek).size() >= jobsPerWeek) {
 				--upperWeek;
 			}
 			
-			calendar.getWeek(upperWeek).add(v);
+			calendar.add(v, upperWeek);
 			--upperWeek;
 			
 			int initMaxWeek = upperWeek;
@@ -116,7 +115,7 @@ public class ProjectScheduler {
 					--maxWeek;
 				}
 					
-				calendar.getWeek(maxWeek).add(w);
+				calendar.add(w, maxWeek);
 				--maxWeek;
 			}
 		}
@@ -129,23 +128,21 @@ public class ProjectScheduler {
 		// Precondition: -
 		// Postcondition: returns string view of the calendar
 		//--------------------------------------------------------
-		StringBuilder calendarStr = new StringBuilder();
-		
-		int week = 0;
-		int taskAtTheWeek = jobsPerWeek + 1;
-		for (int taskIndex: calendar.getCalendarAsOneList()) {
-			String task = taskKeys.get(taskIndex);
-			if (taskAtTheWeek == (jobsPerWeek+1)) {
-				if (week != 0) calendarStr.append("\n");
-				++week;
-				taskAtTheWeek = 1;
-				calendarStr.append("Week " + week + ": ");
+		StringBuilder calendarStr = new StringBuilder();		
+		int weekNo = 1;
+		for (ArrayList<Integer> week: calendar.getAllWeeks()) {
+			calendarStr.append("Week " + weekNo + ": ");
+			
+			for (int taskIndex: week) {
+				String task = taskKeys.get(taskIndex);
+				calendarStr.append(task + " ");
 			}
 			
-			calendarStr.append(task + " ");
-			++taskAtTheWeek;
+			calendarStr.append("\n");
+			weekNo += 1;
 		}
 		
+		calendarStr.deleteCharAt(calendarStr.length() - 1);
 		return calendarStr.toString();
 	}
 	
@@ -176,8 +173,8 @@ public class ProjectScheduler {
 		
 		if (errorFlag) return -9;
 		
-		int precedenceV = calendar.weekOfTask(v);
-		int precedenceW = calendar.weekOfTask(w);
+		int precedenceV = calendar.getWeekNoOfTheTask(v);
+		int precedenceW = calendar.getWeekNoOfTheTask(w);
 		
 		if 		(precedenceV == precedenceW) return  0;
 		else if (precedenceV < precedenceW)  return  1;
@@ -205,7 +202,7 @@ public class ProjectScheduler {
 		return numberOfTasks;
 	}
 	
-	public Calendar4 getCalendar() {
+	public Calendar getCalendar() {
 		//--------------------------------------------------------
 		// Getter for calendar instance
 		//--------------------------------------------------------

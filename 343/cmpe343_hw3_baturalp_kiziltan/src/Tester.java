@@ -30,11 +30,13 @@ public class Tester {
 					"[phase1, phase2, phase3, project1, presentation]",
 					"0: 1 \n1: 2 \n2: \n3: 2 \n4: 2 \n",
 					5,
-					new Calendar4(
-						new int[] { 4 },
-						new int[] { 3, 0 },
-						new int[] { 1 },
-						new int[] { 2 }
+					new Calendar(
+						new int[][] {
+							new int[] { 4 },
+							new int[] { 3, 0 },
+							new int[] { 1 },
+							new int[] { 2 }
+						}
 					)
 			);
 		} catch (FileNotFoundException e) {
@@ -54,7 +56,7 @@ public class Tester {
 		String expectedKeys,
 		String expectedDependencies,
 		int expectedTaskCount,
-		Calendar4 expectedCalendar
+		Calendar expectedCalendar
 	) {
 		//--------------------------------------------------------
 		// Summary: creates a new test and runs comparison methods
@@ -69,6 +71,8 @@ public class Tester {
 		ProjectScheduler scheduler = null;
 		try {
 			scheduler = new ProjectScheduler(fileIO);
+			System.out.println("CALENDAR VIEW: ");
+			System.out.println(scheduler.List() + "\n");
 		} catch (Exception e) {
 			System.out.println("Failed to initialize Project Scheduler. Check correctness of input file.");
 			System.out.println("REASON: " + e.toString());
@@ -146,7 +150,7 @@ public class Tester {
 		return Check(in, expected);
 	}
 	
-	private static boolean checkCalendar(Calendar4 in, Calendar4 expected) {
+	private static boolean checkCalendar(Calendar in, Calendar expected) {
 		//--------------------------------------------------------
 		// Summary: compares two variables for "Calendar"
 		// Precondition: in, expected are Calendar4 instances
