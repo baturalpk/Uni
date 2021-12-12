@@ -56,6 +56,10 @@ public class Edge implements Comparable<Edge> {
         else if (vertex == w) return v;
         else throw new IllegalArgumentException("Illegal endpoint");
     }
+    
+    public Edge switched() {
+    	return new Edge(w, v, weight);
+    }
 
     /**
      * Compares two edges by weight.
