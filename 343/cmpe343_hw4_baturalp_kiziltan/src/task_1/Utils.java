@@ -20,6 +20,7 @@ public class Utils {
 		String firstLine = fileio.nextLine();
 		String cityNames[] = firstLine.split(" ");
 		Cities cities = new Cities(cityNames.length);
+		Arrays.sort(cityNames);
 		
 		for (String city: cityNames) {
 			cities.addCity(city.trim());
@@ -52,6 +53,7 @@ public class Utils {
 		for (Edge e: mst.edges()) {
 			int v = e.either();
 			int w = e.other(v);
+			
 			if (prevRoad == null) prevRoad = e;
 			else {
 				int prevW = prevRoad.other(prevRoad.either());
@@ -64,6 +66,7 @@ public class Utils {
 					prevRoad = e;
 				}
 			}
+			
 			String c1 = cities.getCityNameAt(v);
 			String c2 = cities.getCityNameAt(w);
 			

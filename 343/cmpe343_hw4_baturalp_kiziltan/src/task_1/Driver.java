@@ -38,8 +38,8 @@ public class Driver {
 			System.exit(1);
 		}
 		
-		for (String edge: Utils.MinimumSpanningRoadsOf(cities)) {
-			System.out.println(edge);
+		for (String line: Utils.MinimumSpanningRoadsOf(cities)) {
+			System.out.println(line);
 		}
 		
 	}
