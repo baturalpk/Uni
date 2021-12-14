@@ -3,8 +3,6 @@ package task_1;
 import java.util.ArrayList;
 import shared.Edge;
 import shared.EdgeWeightedGraph;
-import shared.LazyPrimMST;
-import shared.PrimMST;
 
 public class Cities {
 	private ArrayList<String> cityNames;

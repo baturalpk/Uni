@@ -1,24 +1,20 @@
 package task_1;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import shared.Edge;
-import shared.EdgeWeightedGraph;
-import shared.LazyPrimMST;
-import shared.PrimMST;
 
 public class Utils {
 	
-	static Cities BuildCityGraphFromFile(String fileName) throws Exception {
+	static Cities BuildCitiesFromFile(String fileName) throws Exception {
 		Scanner fileio = new Scanner(new File(fileName));
 		
 		String firstLine = fileio.nextLine();
-		String cityNames[] = firstLine.split(" ");
+		String[] cityNames = firstLine.split(" ");
 		Cities cities = new Cities(cityNames.length);
 		Arrays.sort(cityNames);
 		

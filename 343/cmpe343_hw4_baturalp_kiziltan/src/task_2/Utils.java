@@ -4,7 +4,6 @@ import shared.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class Utils {
@@ -14,10 +13,10 @@ public class Utils {
 		REVERSE
 	}
 	
-	private final static String REGEX = "[ \t]";
+	private final static String REGEX = "[ \t]"; // Delimiter for both empty space and tab characters
 	
 	static CountryMap BuildCountryMap(BufferedReader in) throws IOException {
-		String firstLine[] = in.readLine().trim().split(REGEX);
+		String[] firstLine = in.readLine().trim().split(REGEX);
 		int vertexCount = Integer.parseInt(firstLine[0]);
 		int edgeCount = Integer.parseInt(firstLine[1]);
 		
@@ -54,13 +53,12 @@ public class Utils {
 		return map;
 	}
 	
-	static DijkstraUndirectedSP FindShortestPathsOnMap(CountryMap map, String sourceCity) {
+	static DijkstraUndirectedSP FindShortestPathsOnMap(CountryMap map, String sourceCity) throws Exception {
 		return new DijkstraUndirectedSP(map.getGraph(), map.getIdOfCityWithName(sourceCity));
 	}
 	
-	static String InfoAboutShortestPathTo(String targetCity, DijkstraUndirectedSP dusp, CountryMap map) {
+	static String InfoAboutShortestPathTo(String targetCity, DijkstraUndirectedSP dusp, CountryMap map) throws Exception {
 		StringBuilder info = new StringBuilder();
-		// DecimalFormat fmt = new DecimalFormat("0.#");
 		double pathLength = .00;
 		Set<String> visitedCities = new LinkedHashSet<>();
 		TraverseDirection travelDir = null;
@@ -69,7 +67,7 @@ public class Utils {
 		for (Edge road: dusp.pathTo(targetID)) {
 			int v = road.either();
 			int w = road.other(v);
-			
+
 			if (travelDir == null) {
 				if (v == dusp.SOURCE)
 					travelDir = TraverseDirection.DEFAULT;
@@ -88,14 +86,14 @@ public class Utils {
 			visitedCities.add(map.getCityWithIdOf(w).Name());
 		}
 		
-		info.append(visitedCities.size() + " cities to be visited: \n");
-		
+		info.append(visitedCities.size()).append(" cities to be visited: \n");
+
 		Iterator<String> visited = visitedCities.iterator();
 		while (visited.hasNext()) {
-			info.append(visited.next() + "\n");
+			info.append(visited.next()).append("\n");
 		}
 		
-		info.append("Distance: " + (int) pathLength + " km");
+		info.append("Distance: ").append((int) pathLength).append(" km");
 		return info.toString();
 	}
 	

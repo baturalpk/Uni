@@ -3,9 +3,6 @@ package task_1;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
-import shared.EdgeWeightedGraph;
-import shared.PrimMST;
-
 public class Driver {
 
 	public static void main(String[] args) {
@@ -19,7 +16,7 @@ public class Driver {
 		
 		Cities cities = null;
 		try {
-			cities = Utils.BuildCityGraphFromFile(fileName);
+			cities = Utils.BuildCitiesFromFile(fileName);
 		} 
 		catch (FileNotFoundException e) {
 			// TODO: handle exception
