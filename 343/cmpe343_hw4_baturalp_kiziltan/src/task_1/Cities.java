@@ -1,10 +1,11 @@
 //-----------------------------------------------------
-// Title: 
+// Title: Cities class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class provides necessary abstractions
+// to store multiple cities with their names in an edge-weighted graph.
 //-----------------------------------------------------
 
 package task_1;
@@ -19,9 +20,10 @@ public class Cities {
 	
 	public Cities(int cityCount) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initializes member variables
+    	// Precondition: cityCount --> integer
+    	// Postcondition: cityNames and cityGraph are init. with specified
+		// number of empty spaces
     	//--------------------------------------------------------
     	
 		cityNames = new ArrayList<>(cityCount);
@@ -30,9 +32,10 @@ public class Cities {
 	
 	public LazyPrimMST FindMST() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Builds a minimum spanning tree from graph representation of
+		// cities using Prim's lazy MST algorithm.
+    	// Precondition: -
+    	// Postcondition: Returned Lazy Prim MST of cities.
     	//--------------------------------------------------------
     	
 		return new LazyPrimMST(cityGraph);
@@ -40,9 +43,9 @@ public class Cities {
 	
 	public void addCity(String city) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Adds name of city.
+    	// Precondition: city --> String
+    	// Postcondition: the city is added into name list
     	//--------------------------------------------------------
     	
 		cityNames.add(city);
@@ -50,9 +53,10 @@ public class Cities {
 	
 	public void connectCities(String c1, String c2, double timeBetween) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Get vertex numbers of cities c1 and c2. Then
+		// create an edge with given weight, and insert it into city graph.
+    	// Precondition: c1 and c2 --> String, timeBetween --> double
+    	// Postcondition: the cities are inserted into the graph with given weight
     	//--------------------------------------------------------
     	
 		int v = getCityIndexOf(c1);
@@ -64,9 +68,9 @@ public class Cities {
 	
 	public int getCityIndexOf(String c) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: get vertex id of city c
+    	// Precondition: c --> String
+    	// Postcondition: returned vertex id (index) of city c
     	//--------------------------------------------------------
     	
 		return cityNames.indexOf(c);
@@ -74,22 +78,12 @@ public class Cities {
 
 	public String getCityNameAt(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Gets string representation of city with the vertex id
+    	// Precondition: v --> integer
+    	// Postcondition: returned name of city with the specified vertex id
     	//--------------------------------------------------------
     	
 		return cityNames.get(v);
 	}
 
-	public EdgeWeightedGraph getCityGraph() {
-    	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
-    	//--------------------------------------------------------
-    	
-		return cityGraph;
-	}
-	
 }

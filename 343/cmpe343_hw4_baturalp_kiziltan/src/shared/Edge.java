@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Title: 
+// Title: Edge class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class defines an undirected edge with weight.
 //-----------------------------------------------------
 
 
@@ -18,9 +18,9 @@ public class Edge implements Comparable<Edge> {
 
     public Edge(int v, int w, double weight) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Check validity of vertices and create an edge with weight.
+    	// Precondition: v and w --> integers, weight --> double  
+    	// Postcondition: v, w and weight are set
     	//--------------------------------------------------------
     	
         if (v < 0) throw new IllegalArgumentException("vertex index must be a non-negative integer");
@@ -33,9 +33,9 @@ public class Edge implements Comparable<Edge> {
 
     public double weight() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for weight
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return weight;
@@ -43,9 +43,9 @@ public class Edge implements Comparable<Edge> {
 
     public int either() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for v
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return v;
@@ -53,9 +53,9 @@ public class Edge implements Comparable<Edge> {
 
     public int other(int vertex) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for other than the specified vertex
+    	// Precondition: vertex --> integer
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         if      (vertex == v) return w;
@@ -65,9 +65,9 @@ public class Edge implements Comparable<Edge> {
     
     public Edge switched() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Change locations of vertices v and w each other
+    	// Precondition: -
+    	// Postcondition: Returned a new edge with switched locations of v and w
     	//--------------------------------------------------------
     	
     	return new Edge(w, v, weight);
@@ -76,21 +76,12 @@ public class Edge implements Comparable<Edge> {
     @Override
     public int compareTo(Edge that) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Compares weight of this edge by other edge
+    	// Precondition: that --> Edge
+    	// Postcondition: Returned comparison result as integer
     	//--------------------------------------------------------
     	
         return Double.compare(this.weight, that.weight);
     }
 
-    public String toString() {
-    	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
-    	//--------------------------------------------------------
-    	
-        return String.format("%d-%d %.5f", v, w, weight);
-    }
 }

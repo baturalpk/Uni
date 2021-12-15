@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Title: 
+// Title: MinPQ class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class implements a minimum priority queue.
 //-----------------------------------------------------
 
 package task_1;
@@ -17,9 +17,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     public MinPQ(int initCapacity) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initializes member variables of MinPQ
+    	// Precondition: initCapacity --> integer
+    	// Postcondition: n is set 0, pq is initialized with initCapacity + 1
     	//--------------------------------------------------------
     	
         pq = (Key[]) new Object[initCapacity + 1];
@@ -28,9 +28,10 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     public MinPQ() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: No-parametered constructor that initializes PQ with
+        // default size of 1.
+    	// Precondition: -
+    	// Postcondition: Constructed a new MinPQ
     	//--------------------------------------------------------
     	
         this(1);
@@ -38,9 +39,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     public boolean isEmpty() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Check emptiness of PQ
+    	// Precondition: -
+    	// Postcondition: returned whether it's empty or not as boolean
     	//--------------------------------------------------------
     	
         return n == 0;
@@ -48,9 +49,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     public int size() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for n
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return n;
@@ -140,8 +141,8 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void exch(int i, int j) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
+    	// Summary: Swaps i and j each other
+    	// Precondition: i and j --> integer
     	// Postcondition: 
     	//--------------------------------------------------------
     	

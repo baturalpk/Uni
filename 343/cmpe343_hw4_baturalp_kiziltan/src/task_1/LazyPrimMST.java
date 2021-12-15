@@ -1,10 +1,11 @@
 //-----------------------------------------------------
-// Title: 
+// Title: Lazy Prim MST class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class implements lazy version of Prim's
+// minimum spanning tree finding algorithm.
 //-----------------------------------------------------
 
 package task_1;
@@ -22,9 +23,9 @@ public class LazyPrimMST {
 
     public LazyPrimMST(EdgeWeightedGraph G) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initializes member variables, then searches for MST.
+    	// Precondition: G --> EdgeWeightedGraph
+    	// Postcondition: MST is found.
     	//--------------------------------------------------------
     	
         mst = new LinkedList<>();
@@ -37,16 +38,17 @@ public class LazyPrimMST {
 
     private void prim(EdgeWeightedGraph G, int s) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Prim's main algorithm for finding MST. Starts to scan
+        // from the source vertex s until the priority queue is got empty.
+    	// Precondition: G --> EdgeWeightedGraph, s --> integer
+    	// Postcondition: some edges are marked as visited and/or inserted into mst.
     	//--------------------------------------------------------
     	
         scan(G, s);
         while (!pq.isEmpty()) {
             Edge e = pq.delMin();
             int v = e.either(), w = e.other(v);
-            assert marked[v] || marked[w];
+
             if (marked[v] && marked[w]) continue;
             mst.offer(e);
             weight += e.weight();
@@ -57,12 +59,12 @@ public class LazyPrimMST {
 
     private void scan(EdgeWeightedGraph G, int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Prim's scanning algorithm. Inserts edges that
+        // ensures specified conditions into minimum priority queue.
+    	// Precondition: G --> EdgeWeightedGraph, v --> integer
+    	// Postcondition: adjacent edges of v are inserted into PQ if not marked
     	//--------------------------------------------------------
-    	
-        assert !marked[v];
+
         marked[v] = true;
         for (Edge e : G.adj(v))
             if (!marked[e.other(v)]) pq.insert(e);
@@ -70,9 +72,9 @@ public class LazyPrimMST {
 
     public Iterable<Edge> edges() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for mst
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return mst;
@@ -80,9 +82,9 @@ public class LazyPrimMST {
 
     public double weight() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for weight
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return weight;

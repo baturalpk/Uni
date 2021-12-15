@@ -122,7 +122,7 @@ public class Utils {
 			visitedCities.add(map.getCityWithIdOf(w).Name());
 		}
 		
-		info.append(visitedCities.size()).append(" cities to be visited: \n");
+		info.append(visitedCities.size()).append(" cities to be visited:\n");
 
 		Iterator<String> visited = visitedCities.iterator();
 		while (visited.hasNext()) {

@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Title: 
+// Title: EdgeWeightedGraph class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class defines an undirected edge weighted graph.
 //-----------------------------------------------------
 
 package shared;
@@ -19,9 +19,9 @@ public class EdgeWeightedGraph {
 
     public EdgeWeightedGraph(int V) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initializes member variables, constructs an empty graph.
+    	// Precondition: V --> integer
+    	// Postcondition: V is set to V, E is set to 0, adjacency list is initialized.
     	//--------------------------------------------------------
     	
         if (V < 0) throw new IllegalArgumentException("Number of vertices must be non-negative");
@@ -29,15 +29,15 @@ public class EdgeWeightedGraph {
         this.E = 0;
         adj = (ArrayList<Edge>[]) new ArrayList[V];
         for (int v = 0; v < V; v++) {
-            adj[v] = new ArrayList<Edge>();
+            adj[v] = new ArrayList<>();
         }
     }
 
     public int V() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for V
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         return V;
@@ -45,9 +45,9 @@ public class EdgeWeightedGraph {
 
     private void validateVertex(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Checks validity of vertex v
+    	// Precondition: -
+    	// Postcondition: -
     	//--------------------------------------------------------
     	
         if (v < 0 || v >= V)
@@ -56,9 +56,11 @@ public class EdgeWeightedGraph {
 
     public void addEdge(Edge e) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Checks validity of vertices. Then
+        // connects specified vertices by adding an edge
+    	// Precondition: e --> Edge
+    	// Postcondition: the edge is inserted into adjacency
+        // lists of both v and w, the number of edges is increased by 1
     	//--------------------------------------------------------
     	
         int v = e.either();
@@ -72,9 +74,9 @@ public class EdgeWeightedGraph {
 
     public Iterable<Edge> adj(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Checks validity of v and returns its adj list.
+    	// Precondition: v --> integer
+    	// Postcondition: returned adjacency list of v
     	//--------------------------------------------------------
     	
         validateVertex(v);
@@ -83,12 +85,13 @@ public class EdgeWeightedGraph {
 
     public Iterable<Edge> edges() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Brings all available edges that was inserted into the
+        // graph by also checking for self loops.
+    	// Precondition: -
+    	// Postcondition: Returned all edges as an iterable
     	//--------------------------------------------------------
     	
-        ArrayList<Edge> list = new ArrayList<Edge>();
+        ArrayList<Edge> list = new ArrayList<>();
         for (int v = 0; v < V; v++) {
             int selfLoops = 0;
             for (Edge e : adj(v)) {
@@ -104,22 +107,4 @@ public class EdgeWeightedGraph {
         return list;
     }
 
-    public String toString() {
-    	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
-    	//--------------------------------------------------------
-    	
-        StringBuilder s = new StringBuilder();
-        s.append(V).append(" ").append(E).append(NEWLINE);
-        for (int v = 0; v < V; v++) {
-            s.append(v).append(": ");
-            for (Edge e : adj[v]) {
-                s.append(e).append("  ");
-            }
-            s.append(NEWLINE);
-        }
-        return s.toString();
-    }
 }

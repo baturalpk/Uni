@@ -21,35 +21,16 @@ public class Driver {
     	// Precondition: 
     	// Postcondition: 
     	//--------------------------------------------------------
-    	
-		String fileName = "sample_input2.txt";
-		String sourceCity = null;
-		String targetCity = null;
 		
-		if (args.length > 0) {
-			if (args[0].endsWith(".txt")) {
-				fileName = args[0];
-			}
-			
-			if (args.length == 3) {
-				sourceCity = args[1];
-				targetCity = args[2];
-			}
-		}
+		Scanner in = new Scanner( System.in );
+		String fileName = in.next().trim();
+		String sourceCity = in.next().trim();
+		String targetCity = in.next().trim();
+		in.close();
 		
 		BufferedReader fileio = new BufferedReader(new FileReader(fileName));
 		CountryMap countryMap = Utils.BuildCountryMap(fileio);
 		fileio.close();
-
-		System.out.println("inputs: ");
-		Scanner in = new Scanner(System.in);
-		String line = in.nextLine().trim();
-		String city[] = line.split(" ");
-		if (sourceCity == null || targetCity == null) {
-			sourceCity = city[0].trim();
-			targetCity = city[1].trim();
-		}
-		in.close();
 		
 		DijkstraUndirectedSP dusp = Utils.FindShortestPathsOnMap(countryMap, sourceCity);
 		String result = Utils.InfoAboutShortestPathTo(targetCity, dusp, countryMap);
