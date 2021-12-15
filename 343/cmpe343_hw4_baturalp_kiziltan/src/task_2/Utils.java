@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: 
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 4
+// Description: This class 
+//-----------------------------------------------------
+
 package task_2;
 
 import shared.*;
@@ -16,6 +25,12 @@ public class Utils {
 	private final static String REGEX = "[ \t]"; // Delimiter for both empty space and tab characters
 	
 	static CountryMap BuildCountryMap(BufferedReader in) throws IOException {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
 		String[] firstLine = in.readLine().trim().split(REGEX);
 		int vertexCount = Integer.parseInt(firstLine[0]);
 		int edgeCount = Integer.parseInt(firstLine[1]);
@@ -54,16 +69,37 @@ public class Utils {
 	}
 	
 	static DijkstraUndirectedSP FindShortestPathsOnMap(CountryMap map, String sourceCity) throws Exception {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
 		return new DijkstraUndirectedSP(map.getGraph(), map.getIdOfCityWithName(sourceCity));
 	}
 	
 	static String InfoAboutShortestPathTo(String targetCity, DijkstraUndirectedSP dusp, CountryMap map) throws Exception {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
 		StringBuilder info = new StringBuilder();
+		int targetID = map.getIdOfCityWithName(targetCity);
+		
+		if (! dusp.hasPathTo(targetID)) {
+			info
+				.append("! There is no path to ").append(targetCity)
+				.append(" from ").append(map.getCityWithIdOf(dusp.SOURCE));
+			
+			return info.toString();
+		}
+		
 		double pathLength = .00;
 		Set<String> visitedCities = new LinkedHashSet<>();
 		TraverseDirection travelDir = null;
 		
-		int targetID = map.getIdOfCityWithName(targetCity);
 		for (Edge road: dusp.pathTo(targetID)) {
 			int v = road.either();
 			int w = road.other(v);

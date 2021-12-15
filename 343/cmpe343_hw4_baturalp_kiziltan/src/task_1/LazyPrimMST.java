@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: 
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 4
+// Description: This class 
+//-----------------------------------------------------
+
 package task_1;
 
 import shared.Edge;
@@ -12,6 +21,12 @@ public class LazyPrimMST {
     private MinPQ<Edge> pq;
 
     public LazyPrimMST(EdgeWeightedGraph G) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         mst = new LinkedList<>();
         pq = new MinPQ<>();
         marked = new boolean[G.V()];
@@ -21,6 +36,12 @@ public class LazyPrimMST {
     }
 
     private void prim(EdgeWeightedGraph G, int s) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         scan(G, s);
         while (!pq.isEmpty()) {
             Edge e = pq.delMin();
@@ -35,6 +56,12 @@ public class LazyPrimMST {
     }
 
     private void scan(EdgeWeightedGraph G, int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         assert !marked[v];
         marked[v] = true;
         for (Edge e : G.adj(v))
@@ -42,10 +69,22 @@ public class LazyPrimMST {
     }
 
     public Iterable<Edge> edges() {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         return mst;
     }
 
     public double weight() {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         return weight;
     }
 

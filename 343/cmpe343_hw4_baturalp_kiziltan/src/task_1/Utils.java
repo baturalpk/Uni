@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: 
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 4
+// Description: This class 
+//-----------------------------------------------------
+
 package task_1;
 
 import java.io.File;
@@ -11,6 +20,12 @@ import shared.Edge;
 public class Utils {
 	
 	static Cities BuildCitiesFromFile(String fileName) throws Exception {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
 		Scanner fileio = new Scanner(new File(fileName));
 		
 		String firstLine = fileio.nextLine();
@@ -39,6 +54,12 @@ public class Utils {
 	}
 	
 	static Iterable<String> MinimumSpanningRoadsOf(Cities cities) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
 		LazyPrimMST mst = cities.FindMST();
 		ArrayList<String> roads = new ArrayList<>();
 		DecimalFormat fmt = new DecimalFormat("0.#");

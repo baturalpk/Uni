@@ -1,3 +1,12 @@
+//-----------------------------------------------------
+// Title: 
+// Author: Baturalp KIZILTAN
+// ID: 4456996054
+// Section: 1
+// Assignment: 4
+// Description: This class 
+//-----------------------------------------------------
+
 package task_2;
 
 import shared.Edge;
@@ -17,6 +26,12 @@ public class DijkstraUndirectedSP {
     public final long ELAPSED_TIME_TO_BUILD;
 
     public DijkstraUndirectedSP(EdgeWeightedGraph G, int s) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
     	//-------- TIMER - start -----------
     	Instant __start__ = Instant.now();
     	//----------------------------------
@@ -52,6 +67,12 @@ public class DijkstraUndirectedSP {
     }
 
     private void relax(Edge e, int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         int w = e.other(v);
         if (distTo[w] > distTo[v] + e.weight()) {
             distTo[w] = distTo[v] + e.weight();
@@ -62,11 +83,23 @@ public class DijkstraUndirectedSP {
     }
 
     public boolean hasPathTo(int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         validateVertex(v);
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
     public Iterable<Edge> pathTo(int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         validateVertex(v);
         if (!hasPathTo(v)) return null;
         Deque<Edge> path = new ArrayDeque<>();
@@ -79,6 +112,12 @@ public class DijkstraUndirectedSP {
     }
 
     private void validateVertex(int v) {
+    	//--------------------------------------------------------
+    	// Summary: 
+    	// Precondition: 
+    	// Postcondition: 
+    	//--------------------------------------------------------
+    	
         int V = distTo.length;
         if (v < 0 || v >= V)
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
