@@ -1,10 +1,11 @@
 //-----------------------------------------------------
-// Title: 
+// Title: CountryMap class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class defines required level of abstractions to store
+// City objects in an edge weighted graph with their IDs.
 //-----------------------------------------------------
 
 package task_2;
@@ -22,9 +23,10 @@ public class CountryMap {
 	
 	public CountryMap(int cityCount) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Creates 1 HashMap to hold cities by their IDs, and 1
+		// EdgeWeightedGraph to represent their relations between each other.
+    	// Precondition: cityCount --> integer
+    	// Postcondition: the instance variables are initialized.
     	//--------------------------------------------------------
     	
 		cities = new HashMap<>(cityCount);
@@ -33,9 +35,9 @@ public class CountryMap {
 	
 	private double distanceBetween(City c1, City c2) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: calculates euclidean distance between cities
+    	// Precondition: c1 and c2 --> City
+    	// Postcondition: returned total distane between 2 cities as double
     	//--------------------------------------------------------
     	
 		double deltaXSquare = Math.abs((c2.X() - c1.X()) * (c2.X() - c1.X()));
@@ -45,9 +47,10 @@ public class CountryMap {
 	
 	public void addCity(int id, City city) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Stores a City object with its id.
+    	// Precondition: id --> integer, city --> City
+    	// Postcondition: the city is inserted into cities hashmap with its
+		// unique id.
     	//--------------------------------------------------------
     	
 		cities.put(id, city);
@@ -55,9 +58,10 @@ public class CountryMap {
 	
 	public void connectCities(int v, int w) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Retrieves city ids as parameters, then connects
+		// them by adding an edge with the calculated distance between them.
+    	// Precondition: v and w --> integer
+    	// Postcondition: city v & city w are connected with an edge in the graph
     	//--------------------------------------------------------
     	
 		City c1 = getCityWithIdOf(v);
@@ -68,8 +72,10 @@ public class CountryMap {
 	
 	public int getIdOfCityWithName(String cityName) throws Exception {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
+    	// Summary: Searches for specified city by its name inside the
+		// hash map key-value pairs. Throws an exception if it does not
+		// contain.
+    	// Precondition: cityName --> String
     	// Postcondition: 
     	//--------------------------------------------------------
     	
@@ -84,9 +90,9 @@ public class CountryMap {
 	
 	public City getCityWithIdOf(int id) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Returns city that has specified id
+    	// Precondition: id --> integer
+    	// Postcondition: returned an City object
     	//--------------------------------------------------------
     	
 		return cities.get(id);
@@ -94,9 +100,9 @@ public class CountryMap {
 	
 	public EdgeWeightedGraph getGraph() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Getter for the graph
+    	// Precondition: -
+    	// Postcondition: returned the internal graph instance itself
     	//--------------------------------------------------------
     	
 		return graph;

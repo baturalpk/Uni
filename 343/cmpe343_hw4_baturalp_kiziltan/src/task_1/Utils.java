@@ -1,10 +1,11 @@
 //-----------------------------------------------------
-// Title: 
+// Title: Utilities class for Task 1
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class contains required utilities and functionalities
+// for Task 1 application
 //-----------------------------------------------------
 
 package task_1;
@@ -21,9 +22,14 @@ public class Utils {
 	
 	static Cities BuildCitiesFromFile(String fileName) throws Exception {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Takes filename and opens the file. Then reads the input file line by
+		// line to build a Cities object from it. First line contains city names. Then
+		// sorts these inserted city names by lexicographical order. After that operation,
+		// reads edges (roads) and their weights (time between) line by line to insert into
+		// the city graph.
+    	// Precondition: fileName --> String
+    	// Postcondition: The cities are inserted into Cities' graph instance with their
+		// names and edge connections.
     	//--------------------------------------------------------
     	
 		Scanner fileio = new Scanner(new File(fileName));
@@ -55,16 +61,29 @@ public class Utils {
 	
 	static Iterable<String> MinimumSpanningRoadsOf(Cities cities) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Build a MST from cities' graph. Then, stores MST
+		// properties (e.g., total edge weight, city names in order) using
+		// a list of strings to be able to print on console later.
+		// * Tricky part: To follow the natural traversal direction of MST,
+		// in the loop part, the program compares current city edge by the previous one.
+		// And switches (turns around) the edge if necessary.
+		// (e.g.,
+		// * LA --> SF
+		// * Seattle --> SF
+		// 		<becomes>
+		// * LA --> SF
+		// * SF --> Seattle
+		// )
+    	// Precondition: cities --> Cities
+    	// Postcondition: results list, an arraylist of strings, is built
+		// to print the minimum spanning tree properties of the cities.
     	//--------------------------------------------------------
     	
 		LazyPrimMST mst = cities.FindMST();
-		ArrayList<String> roads = new ArrayList<>();
+		ArrayList<String> results = new ArrayList<>();
 		DecimalFormat fmt = new DecimalFormat("0.#");
-		
-		roads.add(fmt.format(mst.weight()));
+
+		results.add(fmt.format(mst.weight()));
 		
 		Edge prevRoad = null;
 		for (Edge e: mst.edges()) {
@@ -88,10 +107,10 @@ public class Utils {
 			String c2 = cities.getCityNameAt(w);
 			
 			String road = String.format("%s %s %s", c1, c2, fmt.format(e.weight()));
-			roads.add(road);
+			results.add(road);
 		}
 		
-		return roads;
+		return results;
 	}
 
 }

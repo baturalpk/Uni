@@ -59,12 +59,11 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void resize(int capacity) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Resizes PQ array with the given capacity
+    	// Precondition: capacity --> integer
+    	// Postcondition: pq array is extended or shrunk
     	//--------------------------------------------------------
-    	
-        assert capacity > n;
+
         Key[] temp = (Key[]) new Object[capacity];
         if (n >= 0) System.arraycopy(pq, 1, temp, 1, n);
         pq = temp;
@@ -72,23 +71,24 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     public void insert(Key x) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: if necessary resizes pq array then inserts a new elements and
+        // runs swim operation.
+    	// Precondition: x --> Key
+    	// Postcondition: new element's inserted
     	//--------------------------------------------------------
     	
         if (n == pq.length - 1) resize(2 * pq.length);
 
         pq[++n] = x;
         swim(n);
-        assert isMinHeap();
     }
 
     public Key delMin() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: deletes the minimum element then does sink & resize operations
+        // if it's necessary
+    	// Precondition: -
+    	// Postcondition: minimum element is removed
     	//--------------------------------------------------------
     	
         Key min = pq[1];
@@ -96,15 +96,14 @@ public class MinPQ<Key> implements Iterable<Key> {
         sink(1);
         pq[n+1] = null;
         if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
-        assert isMinHeap();
         return min;
     }
 
     private void swim(int k) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Special internal method to balance heap tree in upper direction.
+    	// Precondition: k --> integer
+    	// Postcondition: the heap  is balanced
     	//--------------------------------------------------------
     	
         while (k > 1 && greater(k/2, k)) {
@@ -115,9 +114,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void sink(int k) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Special internal method to balance heap tree in lower direction.
+    	// Precondition: k --> integer
+    	// Postcondition: the heap is balanced
     	//--------------------------------------------------------
     	
         while (2*k <= n) {
@@ -131,9 +130,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private boolean greater(int i, int j) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: compares two elements on the pq array to choose the greatest one
+    	// Precondition: i and j --> integer
+    	// Postcondition: returns a boolean as a result of the comparison
     	//--------------------------------------------------------
     	
     	return ((Comparable<Key>) pq[i]).compareTo(pq[j]) > 0;
@@ -141,9 +140,9 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void exch(int i, int j) {
     	//--------------------------------------------------------
-    	// Summary: Swaps i and j each other
+    	// Summary: Swaps elements located at i & j each other
     	// Precondition: i and j --> integer
-    	// Postcondition: 
+    	// Postcondition: swapped two pq keys
     	//--------------------------------------------------------
     	
         Key swap = pq[i];
@@ -151,43 +150,11 @@ public class MinPQ<Key> implements Iterable<Key> {
         pq[j] = swap;
     }
 
-    private boolean isMinHeap() {
-    	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
-    	//--------------------------------------------------------
-    	
-        for (int i = 1; i <= n; i++) {
-            if (pq[i] == null) return false;
-        }
-        for (int i = n+1; i < pq.length; i++) {
-            if (pq[i] != null) return false;
-        }
-        if (pq[0] != null) return false;
-        return isMinHeapOrdered(1);
-    }
-
-    private boolean isMinHeapOrdered(int k) {
-    	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
-    	//--------------------------------------------------------
-    	
-        if (k > n) return true;
-        int left = 2*k;
-        int right = 2*k + 1;
-        if (left  <= n && greater(k, left))  return false;
-        if (right <= n && greater(k, right)) return false;
-        return isMinHeapOrdered(left) && isMinHeapOrdered(right);
-    }
-
     public Iterator<Key> iterator() {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Public method to build a new heap iterator
+    	// Precondition: -
+    	// Postcondition: returns the iterator
     	//--------------------------------------------------------
     	
         return new HeapIterator();
@@ -195,15 +162,15 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private class HeapIterator implements Iterator<Key> {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: An internal class to build a heap iterator using keys in the priority queue
+    	// Precondition: -
+    	// Postcondition: helps for creating a generic key iterator
     	//--------------------------------------------------------
     	
         private MinPQ<Key> copy;
 
         public HeapIterator() {
-        	copy = new MinPQ<Key>(size());
+        	copy = new MinPQ<>(size());
             for (int i = 1; i <= n; i++)
                 copy.insert(pq[i]);
         }
