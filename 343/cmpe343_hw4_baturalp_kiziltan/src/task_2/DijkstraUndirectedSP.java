@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Title: 
+// Title: DijkstraUndirectedSP class
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class finds the shortest paths on an undirected graph.
 //-----------------------------------------------------
 
 package task_2;
@@ -27,13 +27,16 @@ public class DijkstraUndirectedSP {
 
     public DijkstraUndirectedSP(EdgeWeightedGraph G, int s) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Initializes distTo array by filling positive infinity.
+        // Then sets dist. to source 0 and starts edge relaxation from s by
+        // iterating and adding these edges into priority queue. Additionally,
+        // starts a timer to calculate build time performance of the algorithm.
+    	// Precondition: G --> EdgeWeightedGraph, s --> integer
+    	// Postcondition: new Dijkstra undirected shortest path object is constructed
     	//--------------------------------------------------------
     	
     	//-------- TIMER - start -----------
-    	Instant __start__ = Instant.now();
+    	Instant _start_ = Instant.now();
     	//----------------------------------
     	
     	SOURCE = s;
@@ -60,17 +63,19 @@ public class DijkstraUndirectedSP {
         }
 
     	//-------- TIMER - end -----------
-    	Instant __end__ = Instant.now();
+    	Instant _end_ = Instant.now();
     	//----------------------------------
-    	ELAPSED_TIME_TO_BUILD = Duration.between(__start__, __end__).toMillis();
+    	ELAPSED_TIME_TO_BUILD = Duration.between(_start_, _end_).toMillis();
 
     }
 
     private void relax(Edge e, int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Special internal method for Dijkstra's shortest path
+        // relaxation operation. If the distance to w is greater than dist to
+        // v + e's weight then the program tries to add/update w into PQ.
+    	// Precondition: e --> Edge, v and w --> integer
+    	// Postcondition: no change, or w's inserted into PQ, or w's decreased in PQ
     	//--------------------------------------------------------
     	
         int w = e.other(v);
@@ -84,9 +89,9 @@ public class DijkstraUndirectedSP {
 
     public boolean hasPathTo(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Checks whether is there a path to v or not from the source
+    	// Precondition: v --> integer
+    	// Postcondition: returns boolean
     	//--------------------------------------------------------
     	
         validateVertex(v);
@@ -95,9 +100,10 @@ public class DijkstraUndirectedSP {
 
     public Iterable<Edge> pathTo(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Adds edges to the vertex v by starting from the source if there
+        // is a path.
+    	// Precondition: v --> integer
+    	// Postcondition: returns an iterable stack that contains the path
     	//--------------------------------------------------------
     	
         validateVertex(v);
@@ -113,9 +119,9 @@ public class DijkstraUndirectedSP {
 
     private void validateVertex(int v) {
     	//--------------------------------------------------------
-    	// Summary: 
+    	// Summary: Checks validity of the vertex v.
     	// Precondition: 
-    	// Postcondition: 
+    	// Postcondition: throw exception or not
     	//--------------------------------------------------------
     	
         int V = distTo.length;

@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Title: 
+// Title: Driver class for Task 2
 // Author: Baturalp KIZILTAN
 // ID: 4456996054
 // Section: 1
 // Assignment: 4
-// Description: This class 
+// Description: This class is the entry point of Task 2 application.
 //-----------------------------------------------------
 
 package task_2;
@@ -17,9 +17,11 @@ public class Driver {
 
 	public static void main(String[] args) throws Exception {
     	//--------------------------------------------------------
-    	// Summary: 
-    	// Precondition: 
-    	// Postcondition: 
+    	// Summary: Takes input strings. Then builds a CountryMap object. Finally,
+		// finds and prints information about the shortest paths to the target city
+		// from the source city.
+    	// Precondition: args --> String array
+    	// Postcondition: throws Exception or reads inputs and prints result
     	//--------------------------------------------------------
 		
 		Scanner in = new Scanner( System.in );
