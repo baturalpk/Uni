@@ -113,4 +113,29 @@ public class Utils {
 		return results;
 	}
 
+	public static boolean test() throws Exception {
+		// Helper method for Tester class.
+		// Compares expected and exact results each other.
+
+		Cities cities = Utils.BuildCitiesFromFile("custom_test_input1.txt");
+
+		StringBuilder expected = new StringBuilder();
+		expected
+				.append(12 + " ")
+				.append("Ankara SF 2 ")
+				.append("SF LA 3 ")
+				.append("LA London 7 ");
+
+		StringBuilder result = new StringBuilder();
+		for (String line : Utils.MinimumSpanningRoadsOf(cities)) {
+			result.append(line).append(" ");
+		}
+
+		System.out.println("=== Summary for TASK 1 Test:");
+		System.out.println("Expected: " + expected);
+		System.out.println("Result: " + result);
+
+		return result.toString().equals(expected.toString());
+	}
+
 }

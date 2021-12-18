@@ -13,6 +13,7 @@ package task_2;
 import shared.*;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -50,7 +51,7 @@ public class Utils {
 			String cityName;
 			if (line.length == 4) {
 				cityName = line[3];
-			}else {
+			} else {
 				cityName = line[0];
 			}
 			
@@ -149,6 +150,32 @@ public class Utils {
 		
 		info.append("Distance: ").append((int) pathLength).append(" km");
 		return info.toString();
+	}
+
+	public static boolean test() throws Exception {
+		// Helper method for Tester class.
+		// Compares expected and exact results each other.
+
+		CountryMap map = Utils.BuildCountryMap(
+			new BufferedReader(new FileReader("custom_test_input2.txt"))
+		);
+
+		StringBuilder expected = new StringBuilder();
+		expected
+				.append("3 cities to be visited:\n")
+				.append("A\n")
+				.append("B\n")
+				.append("D\n")
+				.append("Distance: 13 km");
+
+		StringBuilder result = new StringBuilder();
+		result.append(Utils.InfoAboutShortestPathTo("D", Utils.FindShortestPathsOnMap(map, "A"), map));
+
+		System.out.println("=== Summary for TASK 2 Test:");
+		System.out.println("Expected: " + expected);
+		System.out.println("Result: " + result);
+
+		return result.toString().equals(expected.toString());
 	}
 	
 }

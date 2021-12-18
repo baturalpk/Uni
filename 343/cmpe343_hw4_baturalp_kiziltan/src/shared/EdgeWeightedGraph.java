@@ -43,6 +43,16 @@ public class EdgeWeightedGraph {
         return V;
     }
 
+    public int E() {
+        //--------------------------------------------------------
+        // Summary: Getter for E
+        // Precondition: -
+        // Postcondition: -
+        //--------------------------------------------------------
+
+        return E;
+    }
+
     private void validateVertex(int v) {
     	//--------------------------------------------------------
     	// Summary: Checks validity of vertex v

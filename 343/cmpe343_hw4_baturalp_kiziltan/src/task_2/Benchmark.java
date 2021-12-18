@@ -27,22 +27,18 @@ public class Benchmark {
     	// Postcondition: Performance results are printed on standard output.
     	//--------------------------------------------------------
     	
-		CountryMap sampleMap = null;
 		CountryMap turkeyMap = null;
 		CountryMap usaMap = null;
 		
 		System.out.println("* running ...\n");
 		
 		try {
-			FileReader sample = new FileReader("sample_input2.txt");
 			FileReader turkey = new FileReader("turkeymap.txt");
 			FileReader usa = new FileReader("usa.txt");
 			
-			sampleMap = Utils.BuildCountryMap(new BufferedReader(sample));
 			turkeyMap = Utils.BuildCountryMap(new BufferedReader(turkey));
 			usaMap = Utils.BuildCountryMap(new BufferedReader(usa));
 			
-			sample.close();
 			turkey.close();
 			usa.close();
 		} 
@@ -57,7 +53,6 @@ public class Benchmark {
 			System.exit(1);
 		}
 		
-		DijkstraUndirectedSP sampleSP = new DijkstraUndirectedSP(sampleMap.getGraph(), 0);
 		DijkstraUndirectedSP turkeySP = new DijkstraUndirectedSP(turkeyMap.getGraph(), 0);
 		DijkstraUndirectedSP usaSP = new DijkstraUndirectedSP(usaMap.getGraph(), 0);
 
@@ -65,15 +60,20 @@ public class Benchmark {
 
 		result
 			.append("=== TIME PERFORMANCE RESULTS: ===\n")
-			.append("* Total elapsed time to build small dataset: ").append(sampleSP.ELAPSED_TIME_TO_BUILD).append(" ms.")
-			.append("\n")
-			.append("* Total elapsed time to build medium dataset: ").append(turkeySP.ELAPSED_TIME_TO_BUILD).append(" ms.")
-			.append("\n")
-			.append("* Total elapsed time to build large dataset: ").append(usaSP.ELAPSED_TIME_TO_BUILD).append(" ms.")
-			.append("\n")
+			.append("* Total elapsed time to build Turkey dataset ")
+				.append("(E= ").append(turkeyMap.getGraph().E())
+				.append(" V= ").append(turkeyMap.getGraph().V()).append("): ")
+				.append(turkeySP.ELAPSED_TIME_TO_BUILD).append(" ms.")
+				.append("\n")
+			.append("* Total elapsed time to build USA dataset ")
+				.append("(E= ").append(usaMap.getGraph().E())
+				.append(", V= ").append(usaMap.getGraph().V()).append("): ")
+				.append(usaSP.ELAPSED_TIME_TO_BUILD).append(" ms.")
+				.append("\n")
 			.append("=== DONE ===");
 		
-		System.out.println(result.toString());
+		System.out.println(result);
+
 	}
 	
 }
